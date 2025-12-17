@@ -12,9 +12,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build (vite)
+        run: npm run build
+
       - name: Sync dist -> webroot
-        run: |
-          rsync -av --delete dist/ /home/lgbeta/webserver/html/
+        run: rsync -av --delete dist/ /home/lgbeta/webserver/html/
 
       - name: Reload nginx (container)
         run: |
@@ -22,5 +33,4 @@ jobs:
           docker exec nginx_portfolio nginx -s reload
 
       - name: Smoke test
-        run: |
-          curl -I http://localhost:8082 | head
+        run: curl -I http://localhost:8082 | head
