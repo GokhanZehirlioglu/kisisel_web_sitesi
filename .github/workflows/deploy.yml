@@ -1,4 +1,4 @@
-name: Build & Deploy (Self-Hosted)
+﻿name: Deploy Portfolio (Pi)
 
 on:
   push:
@@ -9,22 +9,18 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build project
-        run: npm run build
-
-      - name: Deploy to Nginx web root
+      - name: Sync dist -> webroot
         run: |
-          set -e
-          mkdir -p /home/lgbeta/webserver/html/dist
-          rsync -a --delete dist/ /home/lgbeta/webserver/html/dist/
+          rsync -av --delete dist/ /home/lgbeta/webserver/html/
+
+      - name: Reload nginx (container)
+        run: |
+          docker exec nginx_portfolio nginx -t
+          docker exec nginx_portfolio nginx -s reload
+
+      - name: Smoke test
+        run: |
+          curl -I http://localhost:8082 | head
