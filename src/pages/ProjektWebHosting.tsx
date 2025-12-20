@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Image from "next/image"; // Bu satırı ekledim: Hızlandırma motoru burada
 import Layout from "@/components/Layout";
 import {
   Calendar,
@@ -70,6 +71,7 @@ const ProjektWebHosting = () => {
           </button>
 
           <div className="rounded-xl overflow-hidden border border-white/10 bg-black/20 shadow-2xl">
+            {/* Lightbox içindeki resim standart kalabilir, tıklandıktan sonra yüklenir */}
             <img
               src={lightbox.src}
               alt={lightbox.alt}
@@ -86,6 +88,7 @@ const ProjektWebHosting = () => {
     );
   };
 
+  // BURAYI GÜNCELLEDİM: Next.js Image bileşeni kullanılıyor
   const ClickToZoomImage = ({ src, alt }: { src: string; alt: string }) => (
     <button
       type="button"
@@ -94,13 +97,14 @@ const ProjektWebHosting = () => {
       aria-label="Bild vergrößern"
     >
       <div className="rounded-lg overflow-hidden border border-border relative">
-        <img
+        <Image
           src={src}
           alt={alt}
+          width={1200} // Genişlik tahmini (otomatik ölçeklenir)
+          height={800} // Yükseklik tahmini (otomatik ölçeklenir)
           className="w-full h-auto"
-          loading="eager"
-          decoding="async"
-          draggable={false}
+          quality={80} // Kalite optimizasyonu
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
         />
         <div className="absolute bottom-3 right-3 text-xs px-2 py-1 rounded-md bg-black/60 text-white/90">
           Klicken zum Vergrößern
@@ -111,8 +115,6 @@ const ProjektWebHosting = () => {
 
   return (
     <Layout>
-      {/* Bu sayfada "perde perde" hissini yapan şeylerin %90'ı animation/transition.
-          Burada hepsini KAPATIYORUZ (sadece bu sayfa için). */}
       <style jsx global>{`
         /* Sayfa içindeki tüm animasyon ve transition'ları kapat */
         .no-motion *,
@@ -143,39 +145,35 @@ const ProjektWebHosting = () => {
               Sicheres Hosting mit Cloudflare Tunnel - Veröffentlichung einer lokalen Webanwendung ohne Portweiterleitung
             </p>
 
-            {/* Tech Logos (animasyon kaldırıldı) */}
+            {/* Tech Logos */}
             <div className="flex flex-wrap justify-center gap-6 mb-8">
               <img
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cloudflare/cloudflare-original.svg"
                 alt="Cloudflare"
                 className="w-12 h-12"
                 loading="eager"
-                decoding="async"
               />
               <img
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg"
                 alt="Nginx"
                 className="w-12 h-12"
                 loading="eager"
-                decoding="async"
               />
               <img
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
                 alt="Docker"
                 className="w-12 h-12"
                 loading="eager"
-                decoding="async"
               />
               <img
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg"
                 alt="Raspberry Pi"
                 className="w-12 h-12"
                 loading="eager"
-                decoding="async"
               />
             </div>
 
-            {/* Stats (hover-lift kaldırıldı) */}
+            {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
               {stats.map((stat) => (
                 <div key={stat.label} className="glass rounded-xl p-4 text-center">
