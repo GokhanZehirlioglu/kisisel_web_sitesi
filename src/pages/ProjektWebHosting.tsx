@@ -309,7 +309,7 @@ const ProjektWebHosting = () => {
             </p>
 
             <ClickToZoomImage
-              src="/images/Automatisierter_Veroeffentlichungsprozess.png"
+              src="/images/Automatisierter_Veroeffentlichungsprozess.jpg"
               alt="Automatisierter Entwicklungs- und Veröffentlichungsprozess"
             />
           </div>
@@ -328,7 +328,7 @@ const ProjektWebHosting = () => {
             </p>
 
             <ClickToZoomImage
-              src="/images/Zugriff_eines_Besuchers_auf_die_Website.png"
+              src="/images/Zugriff_eines_Besuchers_auf_die_Website.jpg"
               alt="Zugriff eines Besuchers auf die Website"
             />
           </div>
