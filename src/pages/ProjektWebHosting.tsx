@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import {
   Calendar,
@@ -8,9 +9,25 @@ import {
   Globe,
   Lock,
   Cloud,
+  X,
 } from "lucide-react";
 
+type LightboxData = {
+  src: string;
+  alt: string;
+};
+
 const ProjektWebHosting = () => {
+  const [lightbox, setLightbox] = useState<LightboxData | null>(null);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
   const stats = [
     { icon: Calendar, label: "Zeitraum", value: "10.12 - 12.12.2025" },
     { icon: ServerIcon, label: "Platform", value: "Raspberry Pi" },
@@ -31,8 +48,79 @@ const ProjektWebHosting = () => {
     { icon: Globe, title: "Dynamische IP", desc: "Funktioniert auch bei wechselnder IP-Adresse" },
   ];
 
+  const Lightbox = () => {
+    if (!lightbox) return null;
+
+    return (
+      <div
+        className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Image preview"
+        onClick={() => setLightbox(null)}
+      >
+        <div
+          className="relative max-w-6xl w-full"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            type="button"
+            className="absolute -top-3 -right-3 md:top-2 md:right-2 inline-flex items-center justify-center rounded-full bg-black/70 text-white border border-white/20 w-10 h-10 hover:bg-black/80"
+            onClick={() => setLightbox(null)}
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </button>
+
+          <div className="rounded-xl overflow-hidden border border-white/10 bg-black/20 shadow-2xl">
+            <img
+              src={lightbox.src}
+              alt={lightbox.alt}
+              className="w-full h-auto max-h-[85vh] object-contain"
+              draggable={false}
+            />
+          </div>
+
+          <p className="text-xs text-white/70 mt-3 text-center">
+            Tipp: ESC zum Schließen
+          </p>
+        </div>
+      </div>
+    );
+  };
+
+  const ClickToZoomImage = ({
+    src,
+    alt,
+  }: {
+    src: string;
+    alt: string;
+  }) => (
+    <button
+      type="button"
+      className="group block w-full text-left"
+      onClick={() => setLightbox({ src, alt })}
+      aria-label="Bild vergrößern"
+    >
+      <div className="rounded-lg overflow-hidden border border-border relative">
+        <img
+          src={src}
+          alt={alt}
+          className="w-full h-auto"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+        <div className="absolute bottom-3 right-3 text-xs px-2 py-1 rounded-md bg-black/60 text-white/90 opacity-0 group-hover:opacity-100 transition-opacity">
+          Klicken zum Vergrößern
+        </div>
+      </div>
+    </button>
+  );
+
   return (
     <Layout>
+      <Lightbox />
+
       {/* Hero */}
       <section className="py-16 px-4 text-center bg-gradient-to-b from-primary/5 to-transparent relative overflow-hidden">
         <div className="max-w-4xl mx-auto relative z-10">
@@ -190,7 +278,7 @@ const ProjektWebHosting = () => {
         </div>
       </section>
 
-      {/* NEW: Automatisierter Entwicklungs- und Veröffentlichungsprozess (en sona taşındı) */}
+      {/* NEW: Automatisierter Entwicklungs- und Veröffentlichungsprozess */}
       <section className="py-12 px-4 max-w-4xl mx-auto">
         <div className="glass rounded-xl p-6 md:p-8 hover-lift">
           <h2 className="text-2xl font-bold mb-4 gradient-text">
@@ -205,18 +293,14 @@ const ProjektWebHosting = () => {
             Regel innerhalb weniger Sekunden bis Minuten öffentlich sichtbar.
           </p>
 
-          <div className="rounded-lg overflow-hidden border border-border">
-            <img
-              src="/images/Automatisierter_Veroeffentlichungsprozess.png"
-              alt="Automatisierter Entwicklungs- und Veröffentlichungsprozess"
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
+          <ClickToZoomImage
+            src="/images/Automatisierter_Veroeffentlichungsprozess.png"
+            alt="Automatisierter Entwicklungs- und Veröffentlichungsprozess"
+          />
         </div>
       </section>
 
-      {/* NEW: Zugriff eines Besuchers auf die Website (en sona taşındı) */}
+      {/* NEW: Zugriff eines Besuchers auf die Website */}
       <section className="py-12 px-4 max-w-4xl mx-auto">
         <div className="glass rounded-xl p-6 md:p-8 hover-lift">
           <h2 className="text-2xl font-bold mb-4 gradient-text">Zugriff eines Besuchers auf die Website</h2>
@@ -228,14 +312,10 @@ const ProjektWebHosting = () => {
             performanten Zugriff auf die Website, ohne dass direkte Serverports im Internet geöffnet werden müssen.
           </p>
 
-          <div className="rounded-lg overflow-hidden border border-border">
-            <img
-              src="/images/Zugriff_eines_Besuchers_auf_die_Website.png"
-              alt="Zugriff eines Besuchers auf die Website"
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
+          <ClickToZoomImage
+            src="/images/Zugriff_eines_Besuchers_auf_die_Website.png"
+            alt="Zugriff eines Besuchers auf die Website"
+          />
         </div>
       </section>
     </Layout>
