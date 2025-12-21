@@ -10,6 +10,8 @@ import {
   Lock,
   Cloud,
   X,
+  FileText, // Yeni ekledik: Dosya ikonu
+  Download, // Yeni ekledik: İndirme ikonu
 } from "lucide-react";
 
 type LightboxData = {
@@ -126,7 +128,7 @@ const ProjektWebHosting = () => {
       <div className="no-motion">
         <Lightbox />
 
-        {/* Hero */}
+        {/* Hero (Giriş Bölümü) */}
         <section className="py-16 px-4 text-center bg-gradient-to-b from-primary/5 to-transparent relative overflow-hidden">
           <div className="max-w-4xl mx-auto relative z-10">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -135,6 +137,27 @@ const ProjektWebHosting = () => {
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
               Sicheres Hosting mit Cloudflare Tunnel - Veröffentlichung einer lokalen Webanwendung ohne Portweiterleitung
             </p>
+
+            {/* --- YENİ EKLENEN DOCX DOKÜMANTASYON BUTONU --- */}
+            <div className="flex justify-center mb-10">
+              <a 
+                href="/web-hosting-ohne-port-forwarding.docx" // Dosya adı tam olarak buraya yazıldı
+                download // Dosyanın indirilmesini zorlar
+                className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 rounded-full overflow-hidden transition-all hover:bg-white/10 hover:scale-105 active:scale-95"
+              >
+                {/* Buton Arkasındaki Parlama Efekti */}
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/10 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* İkon ve Yazı */}
+                <FileText className="w-5 h-5 text-emerald-400 group-hover:text-emerald-300 transition-colors" />
+                <div className="flex flex-col items-start text-left">
+                  <span className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Projektdokumentation</span>
+                  <span className="text-sm font-bold text-white group-hover:text-emerald-50 transition-colors">Download .DOCX</span>
+                </div>
+                <Download className="w-4 h-4 text-white/50 group-hover:text-white group-hover:translate-y-1 transition-all ml-2" />
+              </a>
+            </div>
+            {/* ----------------------------------------- */}
 
             <div className="flex flex-wrap justify-center gap-6 mb-8">
               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cloudflare/cloudflare-original.svg" alt="Cloudflare" className="w-12 h-12" />
