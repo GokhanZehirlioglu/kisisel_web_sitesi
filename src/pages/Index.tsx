@@ -38,7 +38,7 @@ const Index = () => {
             {/* Hero Content */}
             <div className="flex flex-col gap-8">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
-                <span className="font-semibold gradient-text">ben betülü cok seviyorum.</span>
+                <span className="font-semibold gradient-text">Fachinormatiker für Systemintegration</span>
               </h1>
 
               <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
