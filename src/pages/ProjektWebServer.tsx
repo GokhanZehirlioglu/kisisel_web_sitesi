@@ -10,7 +10,6 @@ import {
   FileText, 
   Download,
   Terminal,
-  Cpu,
   Globe,
   ShieldCheck,
   Activity,
@@ -145,7 +144,7 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
             </div>
           </div>
           
-          {/* SSH LOGIN GÖRSELİ - webserver-foto1.png */}
+          {/* SSH LOGIN GÖRSELİ */}
           <div className="relative group">
             <div className="absolute inset-0 bg-emerald-500/20 blur-2xl rounded-3xl -z-10 group-hover:bg-emerald-500/30 transition-all duration-500" />
             <div className="glass overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
@@ -233,7 +232,8 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
                   </div>
                   <span className="text-[10px] text-emerald-400/60">curl -I localhost:8082</span>
                 </div>
-                {/* Buraya foto4.png gelecek - Curl Çıktısı */}
+                
+                {/* --- DÜZELTİLDİ: Curl Fotoğrafı --- */}
                 <img 
                   src="/images/webserver-foto4.png" 
                   alt="Curl Header Check" 
@@ -259,7 +259,7 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
             </div>
           </div>
 
-          {/* Browser Mockup - GÖRSEL: webserver-foto5.jpg */}
+          {/* Browser Mockup */}
           <div className="relative group rounded-xl overflow-hidden shadow-[0_0_50px_-12px_rgba(0,0,0,0.3)] border border-slate-200 dark:border-white/10 bg-white dark:bg-[#1a1b26]">
             {/* Browser Header */}
             <div className="bg-slate-100 dark:bg-[#24283b] px-4 py-3 flex items-center gap-4 border-b border-slate-200 dark:border-white/5">
@@ -278,6 +278,7 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
 
             {/* Browser Content */}
             <div className="relative aspect-video bg-slate-50">
+              {/* --- DÜZELTİLDİ: Browser Fotoğrafı (.jpg olarak) --- */}
               <img 
                 src="/images/webserver-foto5.jpg" 
                 alt="Browser Network Analysis" 
