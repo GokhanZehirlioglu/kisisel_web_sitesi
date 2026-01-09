@@ -43,22 +43,26 @@ const ProjektHomeAssistant = () => {
     { icon: ShieldCheck, label: "Sicherheitslevel", value: "Local Only / Zero Trust", highlight: true },
   ];
 
-  // Donanım Spekleri
+  // Donanım Spekleri (YENİ SATIR EKLENDİ)
   const hardwareSpecs = [
     { label: "Host System", value: "Raspberry Pi 5, 16GB RAM" },
     { label: "Storage", value: "SanDisk Extreme PRO microSDXC (A2)" },
     { label: "Zigbee Gateway", value: "Sonoff Zigbee 3.0 USB Dongle Plus (FW v2.6.3)" },
     { label: "OS / Kernel", value: "Debian Bookworm (Headless Optimized)" },
+    // YENİ EKLENEN SATIR:
+    { label: "Installierte Container", value: "Home Assistant Core, Zigbee2MQTT, Mosquitto, Tailscale" },
   ];
 
-  // Tech Stack (Logolar CDN)
+  // Tech Stack (DÜZELTİLDİ: Mosquitto & Zigbee Logoları)
   const techStackIcons = [
     { name: "Raspberry Pi", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" },
     { name: "Docker", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
     { name: "Home Assistant", url: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/home-assistant.svg" },
     { name: "Zigbee2MQTT", url: "https://raw.githubusercontent.com/Koenkk/zigbee2mqtt/master/images/logo.png" },
-    { name: "Mosquitto MQTT", url: "https://cdn.simpleicons.org/eclipse-mosquitto/3C5280" },
-    { name: "Zigbee", url: "https://upload.wikimedia.org/wikipedia/commons/9/9a/ZigBee_Alliance_logo.svg" },
+    // DÜZELTİLDİ: Mosquitto (Slug hatası giderildi)
+    { name: "Mosquitto MQTT", url: "https://cdn.simpleicons.org/eclipsemosquitto/3C5280" }, 
+    // DÜZELTİLDİ: Zigbee (Daha stabil kaynak)
+    { name: "Zigbee", url: "https://www.vectorlogo.zone/logos/zigbee/zigbee-icon.svg" }, 
     { name: "Tailscale", url: "https://cdn.simpleicons.org/tailscale/white/121212" }, 
     { name: "Linux", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
   ];
@@ -190,7 +194,7 @@ const ProjektHomeAssistant = () => {
                     </div>
                 ))}
              </div>
-             {/* Tech Stack Icons */}
+             {/* Tech Stack Icons (DÜZELTİLDİ) */}
              <div className="flex flex-wrap gap-4 mt-8 justify-center relative z-10">
                 {techStackIcons.map((tech) => (
                     <div key={tech.name} className="relative group">
