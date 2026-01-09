@@ -253,7 +253,7 @@ const ProjektWebHosting = () => {
           </div>
           <div className="glass rounded-xl p-4 md:p-8">
             <ClickToZoomImage
-              src="/images/Zugriff_eines_Besuchers_auf_die_Website.jpg"
+              src="/images/Zugriff_eines_Besuchers_auf_die_Website.png"
               alt="Zugriff eines Besuchers auf die Website - Flow Chart"
               caption="Diagramm: Request Flow - Der Verkehr wird über das Cloudflare Edge Network geroutet."
             />
