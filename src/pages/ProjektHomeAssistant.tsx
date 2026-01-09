@@ -97,7 +97,7 @@ const ProjektHomeAssistant = () => {
 
         <div className="max-w-5xl mx-auto text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-            <TerminalSquare size={16} /> FISI-Abschlussprojekt (Simulation)
+            <TerminalSquare size={16} /> Home Assistant
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
@@ -138,7 +138,7 @@ const ProjektHomeAssistant = () => {
             </h2>
             <div className="text-muted-foreground leading-relaxed space-y-4">
               <p>
-                Der Markt für Smart-Home-Komponenten ist stark fragmentiert. Große Hersteller (Philips Hue, Tuya, Amazon)
+                Der Markt für Smart-Home-Komponenten ist stark fragmentiert. Große Hersteller (Philips Hue, Hama, Tapo, Amazon, Google, Sonoff Tuya, Amazon)
                 zwingen Nutzer oft in geschlossene Ökosysteme ("Walled Gardens"). Dies führt zu einer heterogenen Infrastruktur,
                 in der Geräte nicht miteinander kommunizieren können und sensible Daten (Kamerabilder, Anwesenheitsstatus)
                 zwingend über externe Cloud-Server geleitet werden.
