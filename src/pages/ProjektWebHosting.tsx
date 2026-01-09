@@ -178,7 +178,7 @@ const ProjektWebHosting = () => {
           <div className="max-w-4xl mx-auto relative z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 text-xs font-medium mb-6">
                <Cloud size={14} />
-               <span>Secure Self-Hosting Project</span>
+               <span>Self-Hosting Project</span>
             </div>
 
             <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
