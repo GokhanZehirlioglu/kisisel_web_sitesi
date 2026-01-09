@@ -19,8 +19,11 @@ import {
   Globe, 
   X,     
   Maximize2,
-  Wifi,    // EKLENDİ (Hata buradaydı)
-  Layers   // EKLENDİ (Hata buradaydı)
+  Wifi,
+  Layers,
+  Zap,
+  ToggleLeft,
+  Box
 } from "lucide-react";
 
 const ProjektHomeAssistant = () => {
@@ -50,7 +53,7 @@ const ProjektHomeAssistant = () => {
     { name: "Docker", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
     { name: "Home Assistant", url: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/home-assistant.svg" },
     { name: "Zigbee2MQTT", url: "https://raw.githubusercontent.com/Koenkk/zigbee2mqtt/master/images/logo.png" },
-    { name: "Tailscale", url: "https://cdn.simpleicons.org/tailscale/white/121212" }, // Dark theme için white versiyon
+    { name: "Tailscale", url: "https://cdn.simpleicons.org/tailscale/white/121212" }, 
     { name: "Linux", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
     { name: "Mosquitto MQTT", url: "https://cdn.simpleicons.org/eclipse-mosquitto/3C5280" },
   ];
@@ -59,7 +62,7 @@ const ProjektHomeAssistant = () => {
   const challenges = [
     {
         title: "Interoperabilität & Protokolle",
-        icon: Wifi, // Artık import edildiği için çalışacak
+        icon: Wifi,
         problem: "Inkompatibilitäten beim Initial-Handshake bestimmter Zigbee-Endgeräte (Sonoff) im Mesh-Netzwerk.",
         solution: "Analyse der Zigbee-Frames via Z2M-Logs, Durchführung gezielter 'Re-Interviews' und Firmware-Upgrade des Coordinators zur Stabilisierung der Mesh-Topologie."
     },
@@ -73,7 +76,7 @@ const ProjektHomeAssistant = () => {
 
   return (
     <Layout>
-      {/* --- LIGHTBOX OVERLAY (Büyütülmüş Resim) --- */}
+      {/* --- LIGHTBOX OVERLAY --- */}
       {selectedImage && (
         <div className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200" onClick={() => setSelectedImage(null)}>
           <button className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors bg-white/10 p-2 rounded-full">
@@ -83,21 +86,20 @@ const ProjektHomeAssistant = () => {
             src={selectedImage} 
             alt="Fullscreen Preview" 
             className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl border border-white/10"
-            onClick={(e) => e.stopPropagation()} // Resme tıklayınca kapanmasın
+            onClick={(e) => e.stopPropagation()} 
           />
         </div>
       )}
 
       {/* HERO SECTION */}
       <section className="pt-20 pb-16 px-4 bg-gradient-to-b from-primary/5 to-transparent relative overflow-hidden">
-        {/* Arka plan */}
         <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none">
              <img src="/images/home-assistant-foto4.png" alt="" className="w-full h-full object-cover blur-lg" />
         </div>
 
         <div className="max-w-5xl mx-auto text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-            <TerminalSquare size={16} /> Home Assistant
+            <TerminalSquare size={16} /> FISI-Abschlussprojekt (Simulation)
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
@@ -119,26 +121,37 @@ const ProjektHomeAssistant = () => {
             ))}
           </div>
 
-          <a href="/home_assistant.docx" download className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-foreground text-background font-medium shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]">
-            <Download className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
-            <span>Technische Dokumentation (.docx)</span>
-          </a>
+          {/* DOKÜMAN İNDİRME BUTONU (YENİ TASARIM) */}
+          <div className="flex justify-center">
+            <a 
+              href="/home_assistant.docx" 
+              download 
+              className="group relative inline-flex items-center gap-4 px-8 py-4 rounded-full bg-white dark:bg-[#1c1c1c] border-2 border-[#03a9f4] shadow-[0_0_20px_-5px_rgba(3,169,244,0.3)] hover:shadow-[0_0_30px_-5px_rgba(3,169,244,0.5)] transition-all hover:scale-[1.02]"
+            >
+              <div className="bg-[#03a9f4]/10 p-2 rounded-lg">
+                 <Download className="w-6 h-6 text-[#03a9f4]" />
+              </div>
+              <div className="text-left">
+                <span className="block text-[10px] font-bold tracking-wider text-[#03a9f4] uppercase">Technische Dokumentation</span>
+                <span className="block text-sm font-bold text-foreground group-hover:text-[#03a9f4] transition-colors">Download .DOCX</span>
+              </div>
+            </a>
+          </div>
         </div>
       </section>
 
 
-      {/* KONTEXT & ARCHITEKTUR */}
+      {/* KONTEXT & SPECS */}
       <section className="py-16 px-4 max-w-5xl mx-auto space-y-20">
         <div className="grid md:grid-cols-2 gap-12 items-start">
           <div className="space-y-6">
-            {/* BAŞLIK DÜZELTİLDİ: Vendor Lock-in ibaresi kalktı */}
             <h2 className="text-2xl font-bold flex items-center gap-3">
               <Lightbulb className="text-primary w-6 h-6" />
               Ausgangslage: Die Herstellerabhängigkeit
             </h2>
             <div className="text-muted-foreground leading-relaxed space-y-4">
               <p>
-                Der Markt für Smart-Home-Komponenten ist stark fragmentiert. Große Hersteller (Philips Hue, Hama, Tapo, Amazon, Google, Sonoff Tuya, Amazon)
+                Der Markt für Smart-Home-Komponenten ist stark fragmentiert. Große Hersteller (Philips Hue, Tuya, Amazon)
                 zwingen Nutzer oft in geschlossene Ökosysteme ("Walled Gardens"). Dies führt zu einer heterogenen Infrastruktur,
                 in der Geräte nicht miteinander kommunizieren können und sensible Daten (Kamerabilder, Anwesenheitsstatus)
                 zwingend über externe Cloud-Server geleitet werden.
@@ -175,76 +188,106 @@ const ProjektHomeAssistant = () => {
              </div>
           </div>
         </div>
+      </section>
 
-        {/* SYSTEMARCHITEKTUR & DATENFLUSS */}
-        <div className="glass p-8 rounded-2xl border-primary/10 text-center">
-            <h3 className="text-xl font-bold mb-10 flex items-center justify-center gap-3">
-                <Network className="text-primary w-6 h-6" />
-                Systemarchitektur & Datenfluss
-            </h3>
-
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 mb-12 overflow-x-auto py-6 px-4">
-                {/* 1. Internet */}
-                <div className="flex flex-col items-center gap-3 min-w-[120px] group">
-                    <div className="bg-blue-500/10 p-5 rounded-full ring-1 ring-blue-500/30 group-hover:scale-110 transition-transform">
-                         <Globe size={32} className="text-blue-500" />
+      {/* --- ZIGBEE & HARDWARE SECTION (YENİ) --- */}
+      <section className="py-16 px-4 bg-background/50 border-y border-primary/5">
+        <div className="max-w-6xl mx-auto">
+            {/* Header: Why Zigbee? */}
+            <div className="grid md:grid-cols-[2fr_1fr] gap-12 items-center mb-16">
+                <div>
+                    <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
+                        <img src="https://raw.githubusercontent.com/Koenkk/zigbee2mqtt/master/images/logo.png" className="w-10 h-10" alt="Zigbee" />
+                        Warum Zigbee Protokoll?
+                    </h2>
+                    <div className="prose text-muted-foreground space-y-4">
+                        <p>
+                            Ein Großteil der verwendeten Hardware basiert bewusst auf dem <strong>Zigbee-Funkstandard</strong>.
+                            Im Gegensatz zu WLAN-Geräten besitzen Zigbee-Komponenten keine eigene IP-Adresse im Heimnetzwerk.
+                        </p>
+                        <ul className="space-y-2">
+                            <li className="flex items-center gap-2"><CheckCircle2 className="text-emerald-500 w-4 h-4"/> <strong>Sicherheit:</strong> Keine direkte Angriffsfläche über IP/TCP.</li>
+                            <li className="flex items-center gap-2"><CheckCircle2 className="text-emerald-500 w-4 h-4"/> <strong>Stabilität:</strong> Entlastung des WLAN-Routers durch eigenes Mesh-Netzwerk.</li>
+                            <li className="flex items-center gap-2"><CheckCircle2 className="text-emerald-500 w-4 h-4"/> <strong>Effizienz:</strong> Extrem geringer Energieverbrauch (Batterielaufzeiten &gt; 1 Jahr).</li>
+                        </ul>
                     </div>
-                    <span className="text-xs font-bold text-muted-foreground">WAN / Internet</span>
                 </div>
-
-                <ArrowRight className="text-muted-foreground/50 hidden md:block" />
-
-                {/* 2. Tailscale (VPN) - Logo */}
-                <div className="flex flex-col items-center gap-3 min-w-[120px] group">
-                    <div className="bg-zinc-900 p-5 rounded-full ring-1 ring-white/20 relative group-hover:scale-110 transition-transform">
-                        <img 
-                            src="https://cdn.simpleicons.org/tailscale/white" 
-                            alt="Tailscale VPN" 
-                            className="w-8 h-8 object-contain" 
-                        />
-                        <span className="absolute -top-2 -right-3 bg-emerald-500 text-[9px] text-white font-bold px-1.5 py-0.5 rounded-full shadow-lg">ENC</span>
+                {/* Hardware List Box */}
+                <div className="glass p-6 rounded-2xl border-primary/10">
+                    <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                        <Box className="text-primary w-5 h-5" /> Installierte Hardware
+                    </h3>
+                    <div className="space-y-3 text-sm">
+                        <div className="flex justify-between border-b border-white/5 pb-2">
+                            <span className="text-muted-foreground flex items-center gap-2"><ThermometerSnowflake size={14}/> Heizkörperthermostate</span>
+                            <span className="font-bold">3 Stück</span>
+                        </div>
+                        <div className="flex justify-between border-b border-white/5 pb-2">
+                            <span className="text-muted-foreground flex items-center gap-2"><Zap size={14}/> Smart Plugs (Messung)</span>
+                            <span className="font-bold">10 Stück</span>
+                        </div>
+                        <div className="flex justify-between border-b border-white/5 pb-2">
+                            <span className="text-muted-foreground flex items-center gap-2"><ToggleLeft size={14}/> Sonoff ZBMINI-L2</span>
+                            <span className="font-bold">5 Stück</span>
+                        </div>
+                        <div className="flex justify-between border-b border-white/5 pb-2">
+                            <span className="text-muted-foreground flex items-center gap-2"><Activity size={14}/> Temp.-/Feuchtesensoren</span>
+                            <span className="font-bold">8 Stück</span>
+                        </div>
                     </div>
-                    <span className="text-xs font-bold text-foreground">Tailscale Mesh</span>
-                </div>
-
-                <ArrowRight className="text-muted-foreground/50 hidden md:block" />
-
-                {/* 3. Docker Host (RPi) - Logo */}
-                <div className="flex flex-col items-center gap-3 min-w-[140px] group">
-                     <div className="glass p-4 rounded-2xl border-primary/20 text-center group-hover:border-primary/50 transition-colors">
-                        <img 
-                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" 
-                            alt="Docker Host" 
-                            className="w-10 h-10 mx-auto mb-2 drop-shadow-lg" 
-                        />
-                        <span className="text-sm font-bold block">Docker Host</span>
-                        <span className="text-[10px] text-muted-foreground">RPi 5 / Debian</span>
-                     </div>
-                </div>
-
-                <ArrowRight className="text-muted-foreground/50 hidden md:block" />
-
-                {/* 4. IoT Network (Zigbee) - Logo */}
-                <div className="flex flex-col items-center gap-3 min-w-[140px] group">
-                    <div className="bg-orange-500/10 p-5 rounded-full ring-1 ring-orange-500/30 group-hover:scale-110 transition-transform">
-                        <img 
-                            src="https://raw.githubusercontent.com/Koenkk/zigbee2mqtt/master/images/logo.png" 
-                            alt="Zigbee2MQTT" 
-                            className="w-8 h-8 object-contain" 
-                        />
-                    </div>
-                    <span className="text-xs font-bold text-orange-500">Zigbee Mesh</span>
                 </div>
             </div>
 
-            <div className="inline-flex flex-col md:flex-row items-center gap-4 bg-red-500/10 border border-red-500/20 p-4 rounded-xl text-left max-w-2xl mx-auto">
-                <Lock className="text-red-500 w-8 h-8 flex-shrink-0" />
-                <div>
-                    <h4 className="text-base font-bold text-red-500 mb-1">Security Policy: No Public Exposure</h4>
-                    <p className="text-sm text-muted-foreground leading-snug">
-                        Es wurde bewusst auf <strong>Port-Forwarding</strong> verzichtet, um die Angriffsfläche zu minimieren.
-                        Der Zugriff erfolgt ausschließlich authentifiziert über das Tailscale-Overlay-Netzwerk (ZTNA-Ansatz).
-                    </p>
+            {/* Hardware Collage Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[150px]">
+                {/* Dongle */}
+                <div className="relative group overflow-hidden rounded-xl border border-white/10 cursor-pointer md:col-span-2 md:row-span-2" onClick={() => setSelectedImage("/images/home-assistant-foto17.jpeg")}>
+                    <img src="/images/home-assistant-foto17.jpeg" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Zigbee Dongle" />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Maximize2 className="text-white w-8 h-8" />
+                    </div>
+                    <div className="absolute bottom-2 left-2 bg-black/60 px-2 py-1 rounded text-xs text-white">Zigbee 3.0 Coordinator</div>
+                </div>
+
+                {/* Thermostats */}
+                <div className="relative group overflow-hidden rounded-xl border border-white/10 cursor-pointer" onClick={() => setSelectedImage("/images/home-assistant-foto13.jpeg")}>
+                    <img src="/images/home-assistant-foto13.jpeg" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Thermostate" />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Maximize2 className="text-white w-6 h-6" />
+                    </div>
+                </div>
+
+                {/* Sonoff Boxes */}
+                <div className="relative group overflow-hidden rounded-xl border border-white/10 cursor-pointer" onClick={() => setSelectedImage("/images/home-assistant-foto14.jpeg")}>
+                    <img src="/images/home-assistant-foto14.jpeg" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Sonoff ZBMINI" />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Maximize2 className="text-white w-6 h-6" />
+                    </div>
+                </div>
+
+                {/* Wiring 1 */}
+                <div className="relative group overflow-hidden rounded-xl border border-white/10 cursor-pointer md:row-span-2" onClick={() => setSelectedImage("/images/home-assistant-foto19.jpeg")}>
+                    <img src="/images/home-assistant-foto19.jpeg" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Wiring Example" />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Maximize2 className="text-white w-6 h-6" />
+                    </div>
+                    <div className="absolute bottom-2 left-2 bg-black/60 px-2 py-1 rounded text-xs text-white">Installation</div>
+                </div>
+
+                {/* Plugs */}
+                <div className="relative group overflow-hidden rounded-xl border border-white/10 cursor-pointer" onClick={() => setSelectedImage("/images/home-assistant-foto16.jpeg")}>
+                    <img src="/images/home-assistant-foto16.jpeg" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Smart Plugs" />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Maximize2 className="text-white w-6 h-6" />
+                    </div>
+                </div>
+
+                {/* Sensors */}
+                <div className="relative group overflow-hidden rounded-xl border border-white/10 cursor-pointer" onClick={() => setSelectedImage("/images/home-assistant-foto15.jpeg")}>
+                    <img src="/images/home-assistant-foto15.jpeg" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Sensoren" />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Maximize2 className="text-white w-6 h-6" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -252,7 +295,7 @@ const ProjektHomeAssistant = () => {
 
 
       {/* TERMINAL & BACKEND */}
-      <section className="py-16 px-4 bg-background/50 border-y border-primary/5">
+      <section className="py-16 px-4">
         <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold mb-4 flex items-center justify-center gap-3">
@@ -272,12 +315,7 @@ const ProjektHomeAssistant = () => {
                          <div className="flex gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div><div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div><div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div></div>
                         <span className="text-xs text-muted-foreground font-mono ml-2">ssh pi@homeassistant</span>
                     </div>
-                    <div className="relative">
-                        <img src="/images/home-assistant-foto9.png" alt="SSH Login Debian" className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
-                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
-                            <Maximize2 className="text-white w-8 h-8 drop-shadow-md" />
-                        </div>
-                    </div>
+                    <img src="/images/home-assistant-foto9.png" alt="SSH Login Debian" className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
                     <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-3 border-t border-white/10 pointer-events-none">
                         <p className="text-xs text-white/90 font-mono">OS Hardening & Access Control</p>
                     </div>
@@ -289,12 +327,7 @@ const ProjektHomeAssistant = () => {
                         <div className="flex gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div><div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div><div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div></div>
                         <span className="text-xs text-muted-foreground font-mono ml-2">docker stats</span>
                     </div>
-                    <div className="relative">
-                        <img src="/images/home-assistant-foto7.png" alt="Docker Container Stats" className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
-                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
-                            <Maximize2 className="text-white w-8 h-8 drop-shadow-md" />
-                        </div>
-                    </div>
+                    <img src="/images/home-assistant-foto7.png" alt="Docker Container Stats" className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
                     <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-3 border-t border-white/10 pointer-events-none">
                         <p className="text-xs text-white/90 font-mono">Container Resource Management</p>
                     </div>
@@ -306,12 +339,7 @@ const ProjektHomeAssistant = () => {
                         <div className="flex gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div><div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div><div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div></div>
                         <span className="text-xs text-muted-foreground font-mono ml-2">ip a</span>
                     </div>
-                    <div className="relative">
-                        <img src="/images/home-assistant-foto8.png" alt="Network Interfaces" className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
-                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
-                            <Maximize2 className="text-white w-8 h-8 drop-shadow-md" />
-                        </div>
-                    </div>
+                    <img src="/images/home-assistant-foto8.png" alt="Network Interfaces" className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
                     <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-3 border-t border-white/10 pointer-events-none">
                         <p className="text-xs text-white/90 font-mono">Interface Analysis (Tailscale & VLANs)</p>
                     </div>
@@ -323,12 +351,7 @@ const ProjektHomeAssistant = () => {
                         <div className="flex gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div><div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div><div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div></div>
                         <span className="text-xs text-muted-foreground font-mono ml-2">htop</span>
                     </div>
-                    <div className="relative">
-                        <img src="/images/home-assistant-foto10.png" alt="Htop Process Monitor" className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
-                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
-                            <Maximize2 className="text-white w-8 h-8 drop-shadow-md" />
-                        </div>
-                    </div>
+                    <img src="/images/home-assistant-foto10.png" alt="Htop Process Monitor" className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
                     <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-3 border-t border-white/10 pointer-events-none">
                         <p className="text-xs text-white/90 font-mono">Realtime Process Monitoring</p>
                     </div>
@@ -403,43 +426,91 @@ const ProjektHomeAssistant = () => {
          </div>
       </section>
 
-      {/* TAILSCALE SECTION */}
-      <section className="py-16 px-4 bg-primary/5 border-y border-primary/10">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-                <h2 className="text-2xl font-bold flex items-center gap-3">
-                    <Globe className="text-primary w-8 h-8" />
-                    Secure Remote Access (Tailscale)
-                </h2>
-                <p className="text-muted-foreground leading-relaxed">
-                    Um das System von unterwegs sicher erreichbar zu machen, ohne Sicherheitsrisiken durch Port-Forwarding einzugehen,
-                    wurde <strong>Tailscale</strong> als Mesh-VPN-Lösung implementiert.
-                </p>
-                <ul className="space-y-3">
-                    <li className="flex items-start gap-3 text-sm text-foreground/80">
-                        <CheckCircle2 className="text-emerald-500 w-5 h-5 flex-shrink-0 mt-0.5" />
-                        <span><strong>Zero Configuration Networking:</strong> Direkte Peer-to-Peer Verbindungen.</span>
-                    </li>
-                    <li className="flex items-start gap-3 text-sm text-foreground/80">
-                        <CheckCircle2 className="text-emerald-500 w-5 h-5 flex-shrink-0 mt-0.5" />
-                        <span><strong>ACL-Steuerung:</strong> Nur autorisierte Geräte im Tailnet haben Zugriff auf den Docker-Host.</span>
-                    </li>
-                </ul>
-            </div>
-            {/* TAILSCALE FOTO - CLICKABLE */}
-            <div className="glass p-2 rounded-xl border-primary/20 shadow-2xl rotate-1 hover:rotate-0 transition-transform duration-500 cursor-pointer group" onClick={() => setSelectedImage("/images/home-assistant-foto12.jpeg")}>
-                <div className="relative overflow-hidden rounded-lg">
-                    <img src="/images/home-assistant-foto12.jpeg" alt="Tailscale Admin Console" className="w-full h-auto object-cover" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
-                         <Maximize2 className="text-white w-8 h-8 drop-shadow-md" />
+      {/* --- SYSTEMARCHITEKTUR & DATENFLUSS (AŞAĞI TAŞINDI) --- */}
+      <div className="py-16 px-4 bg-primary/5 border-y border-primary/10">
+        <div className="max-w-6xl mx-auto glass p-8 rounded-2xl border-primary/10 text-center">
+            <h3 className="text-xl font-bold mb-10 flex items-center justify-center gap-3">
+                <Network className="text-primary w-6 h-6" />
+                Systemarchitektur & Remote Access (Tailscale)
+            </h3>
+
+            {/* ŞEMA */}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 mb-12 overflow-x-auto py-6 px-4">
+                {/* 1. Internet */}
+                <div className="flex flex-col items-center gap-3 min-w-[120px] group">
+                    <div className="bg-blue-500/10 p-5 rounded-full ring-1 ring-blue-500/30 group-hover:scale-110 transition-transform">
+                         <Globe size={32} className="text-blue-500" />
                     </div>
-                    <div className="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-sm p-2 text-center pointer-events-none">
-                         <span className="text-[10px] text-white/80 font-mono">Tailnet Admin Console - Authenticated Devices Only</span>
+                    <span className="text-xs font-bold text-muted-foreground">WAN / Internet</span>
+                </div>
+
+                <ArrowRight className="text-muted-foreground/50 hidden md:block" />
+
+                {/* 2. Tailscale (VPN) - Logo */}
+                <div className="flex flex-col items-center gap-3 min-w-[120px] group">
+                    <div className="bg-zinc-900 p-5 rounded-full ring-1 ring-white/20 relative group-hover:scale-110 transition-transform">
+                        <img 
+                            src="https://cdn.simpleicons.org/tailscale/white" 
+                            alt="Tailscale VPN" 
+                            className="w-8 h-8 object-contain" 
+                        />
+                        <span className="absolute -top-2 -right-3 bg-emerald-500 text-[9px] text-white font-bold px-1.5 py-0.5 rounded-full shadow-lg">ENC</span>
+                    </div>
+                    <span className="text-xs font-bold text-foreground">Tailscale Mesh</span>
+                </div>
+
+                <ArrowRight className="text-muted-foreground/50 hidden md:block" />
+
+                {/* 3. Docker Host (RPi) - Logo */}
+                <div className="flex flex-col items-center gap-3 min-w-[140px] group">
+                     <div className="glass p-4 rounded-2xl border-primary/20 text-center group-hover:border-primary/50 transition-colors">
+                        <img 
+                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" 
+                            alt="Docker Host" 
+                            className="w-10 h-10 mx-auto mb-2 drop-shadow-lg" 
+                        />
+                        <span className="text-sm font-bold block">Docker Host</span>
+                        <span className="text-[10px] text-muted-foreground">RPi 5 / Debian</span>
+                     </div>
+                </div>
+
+                <ArrowRight className="text-muted-foreground/50 hidden md:block" />
+
+                {/* 4. IoT Network (Zigbee) - Logo */}
+                <div className="flex flex-col items-center gap-3 min-w-[140px] group">
+                    <div className="bg-orange-500/10 p-5 rounded-full ring-1 ring-orange-500/30 group-hover:scale-110 transition-transform">
+                        <img 
+                            src="https://raw.githubusercontent.com/Koenkk/zigbee2mqtt/master/images/logo.png" 
+                            alt="Zigbee2MQTT" 
+                            className="w-8 h-8 object-contain" 
+                        />
+                    </div>
+                    <span className="text-xs font-bold text-orange-500">Zigbee Mesh</span>
+                </div>
+            </div>
+
+            {/* TAILSCALE AÇIKLAMA (YENİ EKLENDİ) */}
+            <div className="grid md:grid-cols-2 gap-8 text-left mt-8 bg-black/20 p-6 rounded-xl border border-white/5">
+                <div>
+                    <h4 className="text-lg font-bold flex items-center gap-2 mb-3">
+                        <Globe className="text-emerald-500 w-5 h-5" /> Sicherer Fernzugriff
+                    </h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                        Sollte ein Zugriff von außerhalb notwendig sein (z.B. im Urlaub), kommt <strong>Tailscale</strong> zum Einsatz.
+                        Dies ermöglicht eine verschlüsselte Verbindung zum Heimnetzwerk, ohne dass Router-Ports geöffnet werden müssen (No Port-Forwarding).
+                        Das System bleibt im öffentlichen Internet unsichtbar.
+                    </p>
+                </div>
+                {/* Tailscale Screenshot */}
+                <div className="relative group overflow-hidden rounded-lg border border-white/10 cursor-pointer h-32 md:h-auto" onClick={() => setSelectedImage("/images/home-assistant-foto12.jpeg")}>
+                     <img src="/images/home-assistant-foto12.jpeg" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Tailscale Admin" />
+                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
+                        <Maximize2 className="text-white w-6 h-6" />
                     </div>
                 </div>
             </div>
         </div>
-      </section>
+      </div>
 
 
       {/* FRONTEND & ANALYTICS */}
@@ -477,7 +548,6 @@ const ProjektHomeAssistant = () => {
             {/* Tablet UI - FRONTEND UX BÖLÜMÜ - CLICKABLE */}
             <div className="mb-16">
                 <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-                    {/* İkonun rengi ve boyutu garantiye alındı */}
                     <Activity className="text-primary w-6 h-6" />
                     Frontend UX (Tablet & Mobile)
                 </h3>
