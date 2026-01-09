@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "@/components/Layout";
 import { 
   Calendar, 
@@ -13,10 +13,15 @@ import {
   Globe,
   ShieldCheck,
   Activity,
-  Zap
+  Zap,
+  X,
+  Maximize2
 } from "lucide-react";
 
 const ProjektWebServer = () => {
+  // --- STATE: RESİM BÜYÜTME (LIGHTBOX) ---
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+
   // --- PROJE İSTATİSTİKLERİ ---
   const stats = [
     { icon: Calendar, label: "Zeitraum", value: "08.12 - 09.12.2025" },
@@ -39,33 +44,54 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
 
   return (
     <Layout>
+      {/* --- LIGHTBOX OVERLAY (Büyütülmüş Resim) --- */}
+      {zoomedImage && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 cursor-zoom-out animate-in fade-in duration-200"
+          onClick={() => setZoomedImage(null)}
+        >
+          <button className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors">
+            <X size={32} />
+          </button>
+          <img 
+            src={zoomedImage} 
+            alt="Zoomed Preview" 
+            className="max-w-full max-h-[90vh] rounded-lg shadow-2xl object-contain"
+          />
+        </div>
+      )}
+
       {/* --- HERO SECTION --- */}
-      <section className="py-20 px-4 text-center bg-gradient-to-b from-primary/5 to-transparent relative overflow-hidden">
+      <section className="py-20 px-4 text-center bg-gradient-to-b from-[#009639]/5 to-transparent relative overflow-hidden">
         {/* Arkaplan Süslemeleri */}
-        <div className="absolute top-0 left-1/4 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -z-10 animate-pulse-slow" />
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-[#009639]/10 rounded-full blur-3xl -z-10 animate-pulse-slow" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -z-10 animate-pulse-slow" style={{ animationDelay: '1s' }} />
 
         <div className="max-w-4xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs font-medium mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#009639]/10 border border-[#009639]/20 text-[#009639] text-xs font-medium mb-8">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#009639]"></span>
             </span>
-            
+            Systemintegration Projekt
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-emerald-800 to-slate-900 dark:from-white dark:via-emerald-400 dark:to-white">
-              Web Server auf Raspberry Pi
+          {/* BAŞLIK TASARIMI (Revize Edildi: Altlı Üstlü ve Renkli) */}
+          <h1 className="flex flex-col items-center justify-center font-bold tracking-tight mb-8">
+            <span className="text-4xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-[#009639] via-emerald-600 to-slate-700 dark:to-slate-300 pb-2">
+              Nginx Web Server
+            </span>
+            <span className="text-2xl md:text-3xl text-slate-600 dark:text-slate-400 font-medium mt-2">
+              auf Raspberry Pi 5
             </span>
           </h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
             Implementierung einer skalierbaren, Docker-basierten Web-Server-Infrastruktur 
             zur lokalen Bereitstellung statischer Inhalte.
           </p>
 
-          {/* DOKÜMAN İNDİRME BUTONU */}
+          {/* DOKÜMAN İNDİRME BUTONU (Revize Edildi: Nginx LED/Neon Effect) */}
           <div className="flex justify-center mb-16">
             <a 
               href="/web_server.docx" 
@@ -74,19 +100,20 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
                 group relative inline-flex items-center gap-4 px-8 py-4 
                 rounded-2xl overflow-hidden transition-all duration-300
                 bg-white dark:bg-slate-900 
-                border border-emerald-500/20 hover:border-emerald-500/50
-                shadow-xl shadow-emerald-500/5 hover:shadow-emerald-500/20
+                border border-[#009639]/30 hover:border-[#009639]
+                shadow-[0_0_20px_-5px_rgba(0,150,57,0.3)] hover:shadow-[0_0_30px_-5px_rgba(0,150,57,0.6)]
                 hover:-translate-y-1
               "
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+              {/* Buton İçi Parlama */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#009639]/0 via-[#009639]/5 to-[#009639]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
               
-              <div className="bg-emerald-100 dark:bg-emerald-500/20 p-2 rounded-lg group-hover:scale-110 transition-transform duration-300">
-                <FileText className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+              <div className="bg-[#009639]/10 p-2 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                <FileText className="w-6 h-6 text-[#009639]" />
               </div>
               
               <div className="flex flex-col items-start text-left">
-                <span className="text-xs font-bold tracking-widest uppercase text-emerald-600/70 dark:text-emerald-400/70">
+                <span className="text-xs font-bold tracking-widest uppercase text-[#009639]">
                   Technische Dokumentation
                 </span>
                 <span className="text-sm font-bold text-slate-800 dark:text-white">
@@ -94,17 +121,17 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
                 </span>
               </div>
               
-              <Download className="w-5 h-5 ml-2 text-slate-400 group-hover:text-emerald-500 transition-colors" />
+              <Download className="w-5 h-5 ml-2 text-slate-400 group-hover:text-[#009639] transition-colors" />
             </a>
           </div>
 
           {/* STATS GRID */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {stats.map((stat) => (
-              <div key={stat.label} className="glass p-4 rounded-2xl border border-white/10 dark:border-white/5 hover:border-emerald-500/30 transition-colors duration-300">
-                <stat.icon className="w-6 h-6 mx-auto mb-3 text-emerald-500" />
+              <div key={stat.label} className="glass p-4 rounded-2xl border border-white/10 dark:border-white/5 hover:border-[#009639]/30 transition-colors duration-300">
+                <stat.icon className="w-6 h-6 mx-auto mb-3 text-[#009639]" />
                 <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-1">{stat.label}</p>
-                <p className={`font-bold text-lg ${stat.highlight ? "text-emerald-600 dark:text-emerald-400" : "text-foreground"}`}>
+                <p className={`font-bold text-lg ${stat.highlight ? "text-[#009639] dark:text-emerald-400" : "text-foreground"}`}>
                   {stat.value}
                 </p>
               </div>
@@ -113,48 +140,59 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
         </div>
       </section>
 
-      {/* --- CONTEXT & CHALLENGE --- */}
+      {/* --- CONTEXT & STRATEGY (Revize Edildi: Self-Hosted Metni) --- */}
       <section className="py-12 px-4 max-w-5xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h2 className="text-3xl font-bold flex items-center gap-3">
-              <span className="p-2 rounded-lg bg-primary/10 text-primary"><Database size={24} /></span>
-              Ausgangslage & Ziel
+              <span className="p-2 rounded-lg bg-[#009639]/10 text-[#009639]"><Database size={24} /></span>
+              Ausgangslage & Strategie
             </h2>
+            
+            {/* YENİ METİN (Self-Hosted Stratejisi) */}
             <div className="prose dark:prose-invert text-muted-foreground leading-relaxed">
-              <p>
-                In der bestehenden Home-LAB-Umgebung fehlte eine zentrale Instanz zur Bereitstellung statischer Webinhalte. 
-                Ziel war es, einen <strong>isolierten und reproduzierbaren</strong> Web-Server aufzubauen, ohne dabei direkt 
-                in das Host-System einzugreifen.
+              <p className="mb-4">
+                Für das geplante Web-Projekt stand zunächst die Überlegung im Raum, klassisches Shared Hosting oder Cloud-Dienste zu nutzen. 
+                Um jedoch die volle <strong>Datensouveränität</strong> zu gewährleisten und ein tieferes technisches Verständnis für den gesamten 
+                Request-Lifecycle zu entwickeln, fiel die Entscheidung bewusst gegen Drittanbieter.
               </p>
-              <ul className="space-y-3 mt-4">
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-1 flex-shrink-0" />
-                  <span><strong>Isolation:</strong> Nutzung von Docker zur sauberen Trennung von Host und Applikation.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-1 flex-shrink-0" />
-                  <span><strong>Persistence:</strong> Volume-Mounting für einfache Inhaltsaktualisierung ohne Re-Deployment.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-1 flex-shrink-0" />
-                  <span><strong>Security First:</strong> Bewusster Verzicht auf Public Exposure (vorerst nur LAN).</span>
-                </li>
-              </ul>
+              <p>
+                Stattdessen wurde eine <strong>On-Premise-Lösung (Self-Hosted)</strong> auf dem eigenen Home-Server realisiert. 
+                Dies ermöglicht nicht nur die vollständige Kontrolle über die Server-Konfiguration und Sicherheitsparameter, 
+                sondern dient auch als technisches Fundament, um die Web-Inhalte später sicher (via Tunneling) bereitzustellen, 
+                ohne von externen Hosting-Infrastrukturen abhängig zu sein.
+              </p>
             </div>
+            
+            <ul className="space-y-3 mt-2">
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-[#009639] mt-1 flex-shrink-0" />
+                <span><strong>Isolation:</strong> Nutzung von Docker zur sauberen Trennung von Host und Applikation.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-[#009639] mt-1 flex-shrink-0" />
+                <span><strong>Persistence:</strong> Volume-Mounting für einfache Inhaltsaktualisierung ohne Re-Deployment.</span>
+              </li>
+            </ul>
           </div>
           
-          {/* SSH LOGIN GÖRSELİ */}
-          <div className="relative group">
-            <div className="absolute inset-0 bg-emerald-500/20 blur-2xl rounded-3xl -z-10 group-hover:bg-emerald-500/30 transition-all duration-500" />
-            <div className="glass overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-              <div className="bg-[#1a1b26] p-3 flex items-center gap-2 border-b border-white/5">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/50" />
+          {/* SSH LOGIN GÖRSELİ (Tıklanabilir) */}
+          <div 
+            className="relative group cursor-zoom-in"
+            onClick={() => setZoomedImage("/images/webserver-foto1.png")}
+          >
+            <div className="absolute inset-0 bg-[#009639]/20 blur-2xl rounded-3xl -z-10 group-hover:bg-[#009639]/30 transition-all duration-500" />
+            <div className="glass overflow-hidden rounded-2xl border border-white/10 shadow-2xl transition-transform duration-300 group-hover:scale-[1.02]">
+              <div className="bg-[#1a1b26] p-3 flex items-center justify-between border-b border-white/5">
+                <div className="flex items-center gap-2">
+                   <div className="flex gap-1.5">
+                     <div className="w-3 h-3 rounded-full bg-red-500/50" />
+                     <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+                     <div className="w-3 h-3 rounded-full bg-green-500/50" />
+                   </div>
+                   <div className="text-xs text-slate-500 font-mono ml-2">lgbeta@raspberrypi:~ (SSH)</div>
                 </div>
-                <div className="text-xs text-slate-500 font-mono ml-2">lgbeta@raspberrypi:~ (SSH)</div>
+                <Maximize2 size={14} className="text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <img 
                 src="/images/webserver-foto1.png" 
@@ -178,9 +216,8 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* SOL: VS CODE GÖRÜNÜMÜ (Code Block) */}
+            {/* SOL: VS CODE GÖRÜNÜMÜ */}
             <div className="rounded-xl overflow-hidden shadow-2xl bg-[#1e1e1e] border border-white/10 font-mono text-sm group hover:-translate-y-1 transition-transform duration-500">
-              {/* Header */}
               <div className="flex items-center justify-between px-4 py-3 bg-[#252526] border-b border-white/5">
                 <div className="flex items-center gap-2 text-slate-400">
                   <Code size={16} className="text-blue-400" />
@@ -188,7 +225,6 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
                 </div>
                 <div className="text-xs text-slate-500">YAML</div>
               </div>
-              {/* Code Body */}
               <div className="p-6 overflow-x-auto">
                 <pre className="leading-relaxed">
                   <code>
@@ -223,17 +259,19 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
                 </div>
               </div>
 
-              {/* Curl Header Check (GÖRSEL - webserver-foto4.png) */}
-              <div className="rounded-xl overflow-hidden shadow-xl border border-emerald-500/30 group">
-                <div className="flex items-center justify-between px-4 py-2 bg-emerald-950/30 border-b border-emerald-500/20">
+              {/* Curl Header Check (Tıklanabilir) */}
+              <div 
+                className="rounded-xl overflow-hidden shadow-xl border border-[#009639]/30 group cursor-zoom-in relative"
+                onClick={() => setZoomedImage("/images/webserver-foto4.png")}
+              >
+                <div className="flex items-center justify-between px-4 py-2 bg-emerald-950/30 border-b border-[#009639]/20">
                   <div className="flex items-center gap-2">
                     <Zap size={14} className="text-emerald-400" />
                     <span className="text-xs text-emerald-400 font-bold uppercase">Header Verification</span>
                   </div>
-                  <span className="text-[10px] text-emerald-400/60">curl -I localhost:8082</span>
+                  <Maximize2 size={12} className="text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
                 
-                {/* --- DÜZELTİLDİ: Curl Fotoğrafı --- */}
                 <img 
                   src="/images/webserver-foto4.png" 
                   alt="Curl Header Check" 
@@ -250,8 +288,8 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
       <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center gap-4 mb-8">
-            <div className="bg-emerald-500/10 p-3 rounded-full">
-              <ShieldCheck className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
+            <div className="bg-[#009639]/10 p-3 rounded-full">
+              <ShieldCheck className="w-8 h-8 text-[#009639]" />
             </div>
             <div>
               <h2 className="text-3xl font-bold">Validierung & Testing</h2>
@@ -259,8 +297,11 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
             </div>
           </div>
 
-          {/* Browser Mockup */}
-          <div className="relative group rounded-xl overflow-hidden shadow-[0_0_50px_-12px_rgba(0,0,0,0.3)] border border-slate-200 dark:border-white/10 bg-white dark:bg-[#1a1b26]">
+          {/* Browser Mockup (Tıklanabilir) */}
+          <div 
+            className="relative group rounded-xl overflow-hidden shadow-[0_0_50px_-12px_rgba(0,0,0,0.3)] border border-slate-200 dark:border-white/10 bg-white dark:bg-[#1a1b26] cursor-zoom-in"
+            onClick={() => setZoomedImage("/images/webserver-foto5.png")}
+          >
             {/* Browser Header */}
             <div className="bg-slate-100 dark:bg-[#24283b] px-4 py-3 flex items-center gap-4 border-b border-slate-200 dark:border-white/5">
               <div className="flex gap-1.5">
@@ -270,17 +311,17 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
               </div>
               
               {/* Address Bar */}
-              <div className="flex-1 bg-white dark:bg-[#1a1b26] rounded-md px-3 py-1.5 text-xs md:text-sm text-center font-mono text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-2 shadow-inner">
+              <div className="flex-1 bg-white dark:bg-[#1a1b26] rounded-md px-3 py-1.5 text-xs md:text-sm text-center font-mono text-[#009639] flex items-center justify-center gap-2 shadow-inner">
                 <Globe size={12} className="text-slate-400" />
                 <span>http://100.85.7.24:8082</span>
               </div>
+              <Maximize2 size={16} className="text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
 
-            {/* Browser Content */}
+            {/* Browser Content - DÜZELTİLDİ: .png uzantılı dosya */}
             <div className="relative aspect-video bg-slate-50">
-              {/* --- DÜZELTİLDİ: Browser Fotoğrafı (.jpg olarak) --- */}
               <img 
-                src="/images/webserver-foto5.jpg" 
+                src="/images/webserver-foto5.png" 
                 alt="Browser Network Analysis" 
                 className="w-full h-full object-cover"
               />
@@ -295,7 +336,7 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
             {techStack.map((tech) => (
-              <div key={tech.title} className="flex flex-col items-center justify-center p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5 hover:border-emerald-500/30 transition-colors">
+              <div key={tech.title} className="flex flex-col items-center justify-center p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5 hover:border-[#009639]/30 transition-colors">
                 <img src={tech.icon} alt={tech.title} className="w-8 h-8 mb-2 opacity-80" />
                 <span className="text-sm font-semibold">{tech.title}</span>
                 <span className="text-[10px] text-muted-foreground">{tech.desc}</span>
@@ -315,7 +356,7 @@ a1b2c3d4e5f6   nginx:stable-alpine   Up 3 weeks      0.0.0.0:8082->80/tcp`;
             ist die Basis für das kommende Hosting-Projekt geschaffen.
           </p>
           
-          <div className="inline-flex items-center gap-2 text-sm font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-4 py-2 rounded-full">
+          <div className="inline-flex items-center gap-2 text-sm font-medium text-[#009639] bg-[#009639]/10 px-4 py-2 rounded-full">
             <span>Nächster Schritt:</span>
             <span className="text-foreground">Cloudflare Tunnel & SSL (Kein Port-Forwarding)</span>
             <ArrowRight size={16} />
