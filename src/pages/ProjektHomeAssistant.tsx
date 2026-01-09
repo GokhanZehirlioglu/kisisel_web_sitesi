@@ -17,7 +17,8 @@ import {
   AlertTriangle,
   Lightbulb,
   Layers,
-  Network
+  Network,
+  GlobeLock
 } from "lucide-react";
 
 const ProjektHomeAssistant = () => {
@@ -26,7 +27,7 @@ const ProjektHomeAssistant = () => {
   // Proje Künyesi
   const projectStats = [
     { icon: Calendar, label: "Projektzeitraum", value: "02.10.25 – 29.11.25" },
-    { icon: Server, label: "Hardware-Basis", value: "Raspberry Pi 5 (16GB)" },
+    { icon: Server, label: "Infrastruktur", value: "Raspberry Pi 5 (Docker Host)" },
     { icon: Network, label: "Netzwerk", value: "VLAN & Tailscale VPN" },
     { icon: ShieldCheck, label: "Sicherheitslevel", value: "Local Only / Zero Trust", highlight: true },
   ];
@@ -34,36 +35,34 @@ const ProjektHomeAssistant = () => {
   // Donanım Spekleri
   const hardwareSpecs = [
     { label: "Host System", value: "Raspberry Pi 5, 16GB RAM" },
-    { label: "Speicher", value: "SanDisk Extreme PRO microSDXC (A2)" },
+    { label: "Storage", value: "SanDisk Extreme PRO microSDXC (A2)" },
     { label: "Zigbee Gateway", value: "Sonoff Zigbee 3.0 USB Dongle Plus (FW v2.6.3)" },
-    { label: "Betriebssystem", value: "Raspberry Pi OS (Debian Bookworm)" },
+    { label: "OS / Kernel", value: "Debian Bookworm (Headless Optimized)" },
   ];
 
-  // --- ESKİ YÖNTEM: İkonlar İnternetten (CDN) Geliyor ---
-  // Böylece senin bunları indirmene gerek kalmıyor.
+  // Tech Stack (İkonlar CDN)
   const techStackIcons = [
     { name: "Docker", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-    { name: "Home Assistant", url: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/home-assistant.svg" }, // Alternatif link
+    { name: "Home Assistant", url: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/home-assistant.svg" },
     { name: "Zigbee2MQTT", url: "https://raw.githubusercontent.com/Koenkk/zigbee2mqtt/master/images/logo.png" },
     { name: "Tailscale", url: "https://cdn.simpleicons.org/tailscale/121212" },
-    { name: "Linux / Debian", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
+    { name: "Linux", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
     { name: "Mosquitto MQTT", url: "https://cdn.simpleicons.org/eclipse-mosquitto/3C5280" },
-    { name: "Raspberry Pi", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" }
   ];
 
-   // Karşılaşılan Zorluklar
+   // Challenges
    const challenges = [
     {
-        title: "Zigbee Pairing & Stabilität",
+        title: "Interoperabilität & Protokolle",
         icon: Wifi,
-        problem: "Initialprobleme beim Anlernen von Sonoff-Geräten und instabile Mesh-Verbindungen.",
-        solution: "Durchführung von 'Re-Interviews' in Z2M, strategische Platzierung von Router-Geräten (ZBMINI-L2) zur Mesh-Stärkung und Firmware-Updates des Coordinators."
+        problem: "Inkompatibilitäten beim Initial-Handshake bestimmter Zigbee-Endgeräte (Sonoff) im Mesh-Netzwerk.",
+        solution: "Analyse der Zigbee-Frames via Z2M-Logs, Durchführung gezielter 'Re-Interviews' und Firmware-Upgrade des Coordinators zur Stabilisierung der Mesh-Topologie."
     },
     {
-        title: "Dashboard-Wildwuchs & UX",
+        title: "Datenstruktur & UX-Design",
         icon: Layers,
-        problem: "Unstrukturierte Ansichten durch automatisches Hinzufügen neuer Entitäten führten zu schlechter Bedienbarkeit.",
-        solution: "Komplette Umstrukturierung: Trennung von reinen Monitoring-Daten (Admin-View) und simpler Alltagssteuerung (Tablet-View für die Familie)."
+        problem: "Überflutung des Dashboards durch unstrukturierte Auto-Discovery-Entitäten, was die Usability (WAF) beeinträchtigte.",
+        solution: "Implementierung einer strengen Trennung zwischen Admin-Backend (Monitoring) und User-Frontend (Steuerung) sowie logische Gruppierung aller Sensoren."
     }
    ];
 
@@ -72,7 +71,7 @@ const ProjektHomeAssistant = () => {
     <Layout>
       {/* HERO SECTION */}
       <section className="pt-20 pb-16 px-4 bg-gradient-to-b from-primary/5 to-transparent relative overflow-hidden">
-        {/* Arka plan: Senin yüklediğin yerel resim */}
+        {/* Arka plan: Foto4 (Dashboard) */}
         <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none">
              <img src="/images/home-assistant-foto4.png" alt="" className="w-full h-full object-cover blur-lg" />
         </div>
@@ -84,11 +83,11 @@ const ProjektHomeAssistant = () => {
 
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             Enterprise-Grade Smart Home <br />
-            <span className="gradient-text">auf Raspberry Pi Basis</span>
+            <span className="gradient-text">Infrastruktur & Automation</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
-            Konzeption, Aufbau und Absicherung einer vollständig lokalen, containerbasierten
-            IoT-Infrastruktur als Alternative zu cloudabhängigen Insellösungen.
+            Implementierung einer vollständig lokalen, containerbasierten IoT-Plattform mit Fokus auf
+            Datensouveränität, Netzwerksicherheit und herstellerunabhängiger Integration.
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12">
@@ -103,7 +102,7 @@ const ProjektHomeAssistant = () => {
 
           <a href="/home_assistant.docx" download className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-foreground text-background font-medium shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]">
             <Download className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
-            <span>Vollständige Projektdokumentation (.docx)</span>
+            <span>Technische Dokumentation (.docx)</span>
           </a>
         </div>
       </section>
@@ -115,20 +114,21 @@ const ProjektHomeAssistant = () => {
           <div className="space-y-6">
             <h2 className="text-2xl font-bold flex items-center gap-3">
               <Lightbulb className="text-primary w-6 h-6" />
-              Ausgangslage & Zielsetzung
+              Ausgangslage: Das "Vendor Lock-in" Problem
             </h2>
             <div className="text-muted-foreground leading-relaxed space-y-4">
               <p>
-                Die Ausgangslage war typisch für viele Haushalte: Eine wachsende Anzahl von Smart-Home-Geräten
-                verschiedener Hersteller (Tuya, Sonoff) führte zu einer Fragmentierung ("Insellösungen") und
-                Datenschutzbedenken durch zwingende Cloud-Anbindung.
+                Der Markt für Smart-Home-Komponenten ist stark fragmentiert. Große Hersteller (Philips Hue, Tuya, Amazon)
+                zwingen Nutzer oft in geschlossene Ökosysteme ("Walled Gardens"). Dies führt zu einer heterogenen Infrastruktur,
+                in der Geräte nicht miteinander kommunizieren können und sensible Daten (Kamerabilder, Anwesenheitsstatus)
+                zwingend über externe Cloud-Server geleitet werden.
               </p>
               <div className="glass p-5 rounded-xl border-l-4 border-primary bg-primary/5">
                 <p className="font-medium text-foreground">Das technische Ziel:</p>
                 <p>
-                  Zentralisierung der Steuerung auf einem eigenen Server, vollständige Entkopplung von externen Clouds
-                  (Privacy First) und die praktische Anwendung von FISI-relevanten Themen wie Linux-Administration,
-                  Docker-Containerisierung und Netzwerksegmentierung (VLANs).
+                  Ablösung proprietärer Cloud-Lösungen durch eine zentrale, herstellerunabhängige Management-Plattform (Home Assistant).
+                  Fokus auf <strong>On-Premise Data Processing</strong> (Alle Daten bleiben im lokalen Netz) und Betrieb als
+                  stabiler Microservice via Docker.
                 </p>
               </div>
             </div>
@@ -148,7 +148,7 @@ const ProjektHomeAssistant = () => {
                     </div>
                 ))}
              </div>
-             {/* Teknoloji İkonları (CDN'den geliyor) */}
+             {/* Tech Stack */}
              <div className="flex flex-wrap gap-4 mt-8 justify-center relative z-10">
                 {techStackIcons.map((tech) => (
                     <img key={tech.name} src={tech.url} alt={tech.name} className="h-8 w-8 object-contain opacity-80 hover:opacity-100 transition-opacity" title={tech.name} />
@@ -157,33 +157,34 @@ const ProjektHomeAssistant = () => {
           </div>
         </div>
 
+        {/* SYSTEMARCHITEKTUR ŞEMASI */}
         <div className="glass p-8 rounded-2xl border-primary/10 text-center">
             <h3 className="text-xl font-bold mb-8 flex items-center justify-center gap-3">
                 <Network className="text-primary w-6 h-6" />
-                Systemarchitektur & Netzwerkfluss
+                Systemarchitektur & Datenfluss
             </h3>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-10 overflow-x-auto py-4">
                 <div className="flex flex-col items-center gap-2 min-w-[120px]">
-                    <div className="bg-muted/50 p-4 rounded-full"><Wifi size={24} className="text-muted-foreground" /></div>
-                    <span className="text-xs font-medium text-muted-foreground">Internet (4G/5G)</span>
+                    <div className="bg-muted/50 p-4 rounded-full"><GlobeLock size={24} className="text-muted-foreground" /></div>
+                    <span className="text-xs font-medium text-muted-foreground">WAN / Internet</span>
                 </div>
                 <ArrowRight className="text-muted-foreground hidden md:block" />
 
                 <div className="flex flex-col items-center gap-2 min-w-[120px]">
                     <div className="bg-primary/10 p-4 rounded-full border border-primary/30 relative">
-                        <Lock size={24} className="text-primary" />
+                        <ShieldCheck size={24} className="text-primary" />
                         <span className="absolute -top-2 -right-2 bg-primary text-[10px] text-background font-bold px-1.5 py-0.5 rounded-full">VPN</span>
                     </div>
-                    <span className="text-xs font-bold text-primary">Tailscale Tunnel</span>
+                    <span className="text-xs font-bold text-primary">Tailscale Mesh</span>
                 </div>
                 <ArrowRight className="text-muted-foreground hidden md:block" />
 
                 <div className="flex flex-col items-center gap-2 min-w-[140px]">
                      <div className="glass p-4 rounded-xl border-primary/20 text-center">
                         <Server size={24} className="text-foreground mx-auto mb-2" />
-                        <span className="text-sm font-bold">Raspberry Pi 5</span>
-                        <span className="block text-[10px] text-muted-foreground">(Docker Host)</span>
+                        <span className="text-sm font-bold">Docker Host</span>
+                        <span className="block text-[10px] text-muted-foreground">(Home Assistant Core)</span>
                      </div>
                 </div>
                 <ArrowRight className="text-muted-foreground hidden md:block" />
@@ -192,18 +193,18 @@ const ProjektHomeAssistant = () => {
                     <div className="bg-orange-500/10 p-4 rounded-full border border-orange-500/30">
                         <Layers size={24} className="text-orange-500" />
                     </div>
-                    <span className="text-xs font-bold text-orange-500">IoT VLAN / Zigbee</span>
+                    <span className="text-xs font-bold text-orange-500">Zigbee / IoT</span>
                 </div>
             </div>
 
             <div className="inline-flex flex-col md:flex-row items-center gap-4 bg-red-500/10 border border-red-500/20 p-4 rounded-xl text-left max-w-2xl mx-auto">
-                <ShieldCheck className="text-red-500 w-8 h-8 flex-shrink-0" />
+                <Lock className="text-red-500 w-8 h-8 flex-shrink-0" />
                 <div>
-                    <h4 className="text-base font-bold text-red-500 mb-1">Sicherheitskonzept: Zero Trust</h4>
+                    <h4 className="text-base font-bold text-red-500 mb-1">Security Policy: No Public Exposure</h4>
                     <p className="text-sm text-muted-foreground leading-snug">
-                        Es wurde bewusst auf jegliches <strong>Port-Forwarding</strong> am Router verzichtet.
-                        Das System ist aus dem öffentlichen Internet nicht direkt erreichbar.
-                        Zugriff erfolgt ausschließlich über authentifizierte VPN-Tunnel (Tailscale).
+                        Es wurde bewusst auf <strong>Port-Forwarding</strong> verzichtet, um die Angriffsfläche zu minimieren.
+                        Der Zugriff erfolgt ausschließlich authentifiziert über das Tailscale-Overlay-Netzwerk (ZTNA-Ansatz).
+                        Die Segmentierung der IoT-Geräte in separate VLANs ist als nächster Projektschritt definiert.
                     </p>
                 </div>
             </div>
@@ -211,66 +212,62 @@ const ProjektHomeAssistant = () => {
       </section>
 
 
-      {/* TERMINAL & BACKEND */}
+      {/* TERMINAL & BACKEND (ENGINE ROOM) */}
       <section className="py-16 px-4 bg-background/50 border-y border-primary/5">
         <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold mb-4 flex items-center justify-center gap-3">
                     <TerminalSquare className="text-primary w-8 h-8" />
-                    Deep Dive: Die "Engine Room"
+                    Deep Dive: Service Management
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                    Ein Blick hinter die Kulissen: Direkte Systemverwaltung auf Linux-Ebene, Container-Orchestrierung
-                    und Netzwerkanalyse via CLI. Hier zeigt sich die technische Basis des stabilen Betriebs.
+                    Direkte Systemverwaltung auf Linux-Ebene. Container-Orchestrierung,
+                    Ressourcen-Monitoring und Netzwerkanalyse via CLI bilden das Fundament des stabilen Betriebs.
                 </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-                {/* FOTO 9 - SSH */}
+                {/* SSH */}
                 <div className="group relative rounded-xl overflow-hidden shadow-lg border border-white/10 bg-[#1e1e1e]">
                     <div className="bg-[#2d2d2d] px-4 py-2 flex items-center gap-2 border-b border-white/5">
-                        <div className="flex gap-1.5"><div className="w-3 h-3 rounded-full bg-red-500/80"></div><div className="w-3 h-3 rounded-full bg-yellow-500/80"></div><div className="w-3 h-3 rounded-full bg-green-500/80"></div></div>
-                        <span className="text-xs text-muted-foreground font-mono ml-2">ssh pi@homeassistant</span>
+                        <span className="text-xs text-muted-foreground font-mono">ssh pi@homeassistant</span>
                     </div>
                     <img src="/images/home-assistant-foto9.png" alt="SSH Login Debian" className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
                     <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-3 border-t border-white/10">
-                        <p className="text-xs text-white/90 font-mono">Secure Shell Access & OS Check (Debian GNU/Linux 12)</p>
+                        <p className="text-xs text-white/90 font-mono">OS Hardening & Access Control</p>
                     </div>
                 </div>
 
-                 {/* FOTO 7 - Docker */}
+                 {/* Docker */}
                  <div className="group relative rounded-xl overflow-hidden shadow-lg border border-white/10 bg-[#1e1e1e]">
                     <div className="bg-[#2d2d2d] px-4 py-2 flex items-center gap-2 border-b border-white/5">
-                        <div className="flex gap-1.5"><div className="w-3 h-3 rounded-full bg-red-500/80"></div><div className="w-3 h-3 rounded-full bg-yellow-500/80"></div><div className="w-3 h-3 rounded-full bg-green-500/80"></div></div>
-                        <span className="text-xs text-muted-foreground font-mono ml-2">docker stats</span>
+                        <span className="text-xs text-muted-foreground font-mono">docker stats</span>
                     </div>
                     <img src="/images/home-assistant-foto7.png" alt="Docker Container Stats" className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
                     <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-3 border-t border-white/10">
-                        <p className="text-xs text-white/90 font-mono">Container-Ressourcenmanagement (CPU/RAM Usage)</p>
+                        <p className="text-xs text-white/90 font-mono">Container Resource Management</p>
                     </div>
                 </div>
 
-                 {/* FOTO 8 - IP */}
+                 {/* Network / IP */}
                  <div className="group relative rounded-xl overflow-hidden shadow-lg border border-white/10 bg-[#1e1e1e]">
                     <div className="bg-[#2d2d2d] px-4 py-2 flex items-center gap-2 border-b border-white/5">
-                        <div className="flex gap-1.5"><div className="w-3 h-3 rounded-full bg-red-500/80"></div><div className="w-3 h-3 rounded-full bg-yellow-500/80"></div><div className="w-3 h-3 rounded-full bg-green-500/80"></div></div>
-                        <span className="text-xs text-muted-foreground font-mono ml-2">ip a</span>
+                        <span className="text-xs text-muted-foreground font-mono">ip a</span>
                     </div>
                     <img src="/images/home-assistant-foto8.png" alt="Network Interfaces" className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
                     <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-3 border-t border-white/10">
-                        <p className="text-xs text-white/90 font-mono">Netzwerk-Schnittstellenanalyse (Tailscale & VLANs)</p>
+                        <p className="text-xs text-white/90 font-mono">Interface Analysis (Tailscale & VLANs)</p>
                     </div>
                 </div>
 
-                 {/* FOTO 10 - Htop */}
+                 {/* Htop */}
                  <div className="group relative rounded-xl overflow-hidden shadow-lg border border-white/10 bg-[#1e1e1e]">
                     <div className="bg-[#2d2d2d] px-4 py-2 flex items-center gap-2 border-b border-white/5">
-                        <div className="flex gap-1.5"><div className="w-3 h-3 rounded-full bg-red-500/80"></div><div className="w-3 h-3 rounded-full bg-yellow-500/80"></div><div className="w-3 h-3 rounded-full bg-green-500/80"></div></div>
-                        <span className="text-xs text-muted-foreground font-mono ml-2">htop</span>
+                        <span className="text-xs text-muted-foreground font-mono">htop</span>
                     </div>
-                    <img src="/images/home-assistant-foto10.png" alt="Htop Process Monitor" className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
+                    <img src="/images/home-assistant-foto10.jpg" alt="Htop Process Monitor" className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
                     <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-3 border-t border-white/10">
-                        <p className="text-xs text-white/90 font-mono">Echtzeit-Prozess- & Systemüberwachung</p>
+                        <p className="text-xs text-white/90 font-mono">Realtime Process Monitoring</p>
                     </div>
                 </div>
             </div>
@@ -278,50 +275,48 @@ const ProjektHomeAssistant = () => {
       </section>
 
 
-      {/* LOGIC & PRIVACY */}
+      {/* LOGIC & PRIVACY (KAMERA & OTOMASYON) */}
       <section className="py-16 px-4 max-w-5xl mx-auto">
          <div className="text-center mb-12">
             <h2 className="text-2xl font-bold flex items-center justify-center gap-3 mb-4">
                 <Activity className="text-primary w-7 h-7" />
-                Intelligente Automatisierung & Logik
+                Automations-Logik & Privacy
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-                Das System reagiert proaktiv auf Umweltbedingungen und Anwesenheit.
-                Zwei Beispiele für implementierte Logiken aus der Projektdokumentation.
+                Das System agiert nicht nur reaktiv, sondern proaktiv. Komplexe Skripte und Zustandsautomaten steuern
+                Heizung und Sicherheit unter strikter Einhaltung der Privatsphäre.
             </p>
          </div>
 
          <div className="grid md:grid-cols-2 gap-8">
+            {/* Logic Card */}
             <div className="glass p-6 rounded-2xl border-primary/10 hover:border-primary/30 transition-colors">
                 <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
                     <ThermometerSnowflake className="text-blue-500 w-5 h-5" />
-                    Heizungs- & Fensterlogik
+                    Heizungs-Algorithmus
                 </h3>
                 <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-                    Um Energie zu sparen, werden Heizkörperthermostate automatisch abgeschaltet, wenn ein Fenster im Raum geöffnet wird.
-                    Eine Sicherheitsroutine reaktiviert die Heizung nach 2 Stunden, um Auskühlung zu verhindern.
+                    Logische Verknüpfung von Fensterkontakten und Thermostaten. Ein "Safety-Timer" (Watchdog)
+                    stellt sicher, dass Heizkörper bei Sensorausfällen oder vergessenem Fenster nicht einfrieren.
                 </p>
                 <div className="flex items-center justify-between text-xs font-medium bg-muted/30 p-3 rounded-lg border border-white/5">
-                    <div className="text-center"><span className="block mb-1">🪟 Fenster AUF</span><span className="text-red-500">Trigger</span></div>
+                    <div className="text-center"><span className="block mb-1">🪟 State: OPEN</span><span className="text-red-500">Trigger</span></div>
                     <ArrowRight size={16} className="text-muted-foreground" />
-                    <div className="text-center"><span className="block mb-1">🔥 Heizung AUS</span><span className="text-blue-500">Action</span></div>
+                    <div className="text-center"><span className="block mb-1">🔥 Set: OFF</span><span className="text-blue-500">Action</span></div>
                     <ArrowRight size={16} className="text-muted-foreground" />
-                    <div className="text-center bg-yellow-500/10 p-1 rounded"><span className="block mb-1">⏳ 2 Std. Warten</span><span className="text-yellow-500">Safety Timer</span></div>
+                    <div className="text-center bg-yellow-500/10 p-1 rounded"><span className="block mb-1">⏳ Wait: 2h</span><span className="text-yellow-500">Safety Loop</span></div>
                     <ArrowRight size={16} className="text-muted-foreground" />
-                    <div className="text-center"><span className="block mb-1">🔥 Heizung AN</span><span className="text-green-500">Fallback</span></div>
+                    <div className="text-center"><span className="block mb-1">🔥 Set: AUTO</span><span className="text-green-500">Restore</span></div>
                 </div>
             </div>
 
+            {/* Camera Privacy Card */}
             <div className="glass p-0 rounded-2xl border-primary/10 overflow-hidden hover:border-primary/30 transition-colors flex flex-col">
                 <div className="relative h-56 overflow-hidden group">
-                     {/* KAMERA FOTOSU - .jpeg */}
                     <img src="/images/home-assistant-foto11.jpeg" alt="Indoor Kamera" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                     <div className="absolute top-3 right-3 flex gap-2">
                         <div className="bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1">
-                            <EyeOff size={12} className="text-red-400" /> Privacy Mode
-                        </div>
-                        <div className="bg-green-500/80 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1">
-                            <CheckCircle2 size={12} /> Active
+                            <EyeOff size={12} className="text-red-400" /> Geo-Fencing Active
                         </div>
                     </div>
                 </div>
@@ -329,12 +324,12 @@ const ProjektHomeAssistant = () => {
                     <div>
                         <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
                             <Lock className="text-red-500 w-5 h-5" />
-                            Datenschutz-orientierte Überwachung
+                            Privacy-First Überwachung
                         </h3>
                         <p className="text-sm text-muted-foreground leading-relaxed">
-                            Innenkameras dienen ausschließlich der Sicherheit bei Abwesenheit.
-                            Die Stromzufuhr der Kameras wird physisch über Smart Plugs gekappt,
-                            sobald eine berechtigte Person (via WLAN/GPS-Tracking) zu Hause erkannt wird.
+                            Innenkameras sind physisch stromlos geschaltet (Smart Plug), solange berechtigte Personen
+                            (via WLAN/GPS-Tracking) im Haus sind. Bilddaten verlassen niemals das lokale Netzwerk
+                            und werden nicht in einer Hersteller-Cloud gespeichert.
                         </p>
                     </div>
                 </div>
@@ -342,69 +337,105 @@ const ProjektHomeAssistant = () => {
          </div>
       </section>
 
+      {/* TAILSCALE SECTION (YENİ EKLENEN KISIM) */}
+      <section className="py-16 px-4 bg-primary/5 border-y border-primary/10">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+                <h2 className="text-2xl font-bold flex items-center gap-3">
+                    <GlobeLock className="text-primary w-8 h-8" />
+                    Secure Remote Access (Tailscale)
+                </h2>
+                <p className="text-muted-foreground leading-relaxed">
+                    Um das System von unterwegs sicher erreichbar zu machen, ohne Sicherheitsrisiken durch Port-Forwarding einzugehen,
+                    wurde <strong>Tailscale</strong> als Mesh-VPN-Lösung implementiert.
+                </p>
+                <ul className="space-y-3">
+                    <li className="flex items-start gap-3 text-sm text-foreground/80">
+                        <CheckCircle2 className="text-emerald-500 w-5 h-5 flex-shrink-0 mt-0.5" />
+                        <span><strong>Zero Configuration Networking:</strong> Direkte Peer-to-Peer Verbindungen (NAT Traversal).</span>
+                    </li>
+                    <li className="flex items-start gap-3 text-sm text-foreground/80">
+                        <CheckCircle2 className="text-emerald-500 w-5 h-5 flex-shrink-0 mt-0.5" />
+                        <span><strong>ACL-Steuerung:</strong> Nur autorisierte Geräte im Tailnet (siehe Screenshot) haben Zugriff auf den Docker-Host.</span>
+                    </li>
+                    <li className="flex items-start gap-3 text-sm text-foreground/80">
+                        <CheckCircle2 className="text-emerald-500 w-5 h-5 flex-shrink-0 mt-0.5" />
+                        <span><strong>CGNAT-Resistent:</strong> Funktioniert auch hinter DS-Lite Anschlüssen zuverlässig.</span>
+                    </li>
+                </ul>
+            </div>
+            {/* TAILSCALE FOTO */}
+            <div className="glass p-2 rounded-xl border-primary/20 shadow-2xl rotate-1 hover:rotate-0 transition-transform duration-500">
+                <div className="relative overflow-hidden rounded-lg">
+                    <img src="/images/home-assistant-foto12.jpeg" alt="Tailscale Admin Console" className="w-full h-auto object-cover" />
+                    {/* Overlay IP açıklama */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-sm p-2 text-center">
+                         <span className="text-[10px] text-white/80 font-mono">Tailnet Admin Console - Authenticated Devices Only</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </section>
+
 
       {/* FRONTEND & ANALYTICS */}
-      <section className="py-16 px-4 bg-black/20 border-t border-primary/5">
+      <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
              <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold mb-4 flex items-center justify-center gap-3 gradient-text">
-                    Das Ergebnis: Zentrale Kontrolle & Analyse
+                    Das Ergebnis: Zentrale Kontrolle
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                    Die technische Komplexität wird in eine intuitive Benutzeroberfläche für den Alltag (WAF)
-                    und detaillierte Analyse-Dashboards für das Systemmanagement übersetzt.
+                    Die technische Komplexität wird in eine intuitive Benutzeroberfläche abstrahiert.
+                    Das System unterscheidet strikt zwischen technischem Monitoring und täglicher Bedienung.
                 </p>
             </div>
 
-            {/* A) Ana Sistem Dashboard */}
+            {/* Dashboard */}
             <div className="mb-16">
                 <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
                     <Server size={20} className="text-primary" />
-                    System-Health & Admin Dashboard
+                    Infrastructure Health Dashboard
                 </h3>
                 <div className="rounded-2xl overflow-hidden shadow-2xl border border-primary/20 group relative">
-                     {/* FOTO 4 - Dashboard */}
                     <img src="/images/home-assistant-foto4.png" alt="Home Assistant Admin Dashboard" className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.01]" />
                     <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 flex items-center gap-2 shadow-lg">
                         <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></div>
-                        <span className="text-xs text-white/90 font-medium">System Status: Optimal</span>
+                        <span className="text-xs text-white/90 font-medium">System Status: Healthy</span>
                     </div>
                 </div>
                 <p className="text-sm text-muted-foreground mt-3 text-center">
-                    Zentrale Übersicht über Server-Ressourcen (CPU, RAM, Speicher), Netzwerkstatus und Zigbee-Verbindungsqualität.
+                    Echtzeit-Überwachung von Server-Metriken (Load, RAM, Storage) und Zigbee-Signalqualität.
                 </p>
             </div>
 
-            {/* B) Tablet UI */}
+            {/* Tablet UI */}
             <div className="mb-16">
                 <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
                     <Layout className="text-primary w-5 h-5" />
-                    Alltags-UI (Tablet & Mobile)
+                    Frontend UX (Tablet & Mobile)
                 </h3>
                 <div className="grid md:grid-cols-3 gap-4">
                     <div className="glass p-2 rounded-xl border-primary/10 hover:border-primary/30 transition-all hover:-translate-y-1">
-                         {/* FOTO 1 */}
                         <img src="/images/home-assistant-foto1.png" alt="Tablet UI Main Control" className="w-full h-auto rounded-lg shadow-sm" />
-                        <p className="text-xs text-muted-foreground text-center mt-2 font-medium">Raumsteuerung & Szenen</p>
+                        <p className="text-xs text-muted-foreground text-center mt-2 font-medium">Beleuchtung & Szenen</p>
                     </div>
                     <div className="glass p-2 rounded-xl border-primary/10 hover:border-primary/30 transition-all hover:-translate-y-1">
-                         {/* FOTO 2 */}
                         <img src="/images/home-assistant-foto2.png" alt="Tablet UI Climate" className="w-full h-auto rounded-lg shadow-sm" />
-                        <p className="text-xs text-muted-foreground text-center mt-2 font-medium">Klima & Heizungsübersicht</p>
+                        <p className="text-xs text-muted-foreground text-center mt-2 font-medium">Klimasteuerung</p>
                     </div>
                     <div className="glass p-2 rounded-xl border-primary/10 hover:border-primary/30 transition-all hover:-translate-y-1">
-                         {/* FOTO 3 */}
                         <img src="/images/home-assistant-foto3.png" alt="Tablet UI Map" className="w-full h-auto rounded-lg shadow-sm" />
-                        <p className="text-xs text-muted-foreground text-center mt-2 font-medium">Anwesenheit & Geofencing</p>
+                        <p className="text-xs text-muted-foreground text-center mt-2 font-medium">Präsenz & Geofencing</p>
                     </div>
                 </div>
             </div>
 
-             {/* C) Enerji Analizi */}
+             {/* Enerji Analizi */}
             <div>
                 <h3 className="text-xl font-bold mb-6 flex items-center gap-2 gradient-text">
                     <Activity size={20} />
-                    Energiemanagement & Datenanalyse
+                    Data Analytics & Energy Management
                 </h3>
                 <div className="bg-[#121212] rounded-2xl p-6 md:p-8 border border-white/5 shadow-2xl relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/0 via-primary/50 to-primary/0 opacity-70"></div>
@@ -412,20 +443,14 @@ const ProjektHomeAssistant = () => {
                         <div className="space-y-4 order-2 md:order-1">
                             <h4 className="text-lg font-bold text-white mb-2">Verbrauchstransparenz</h4>
                              <p className="text-sm text-gray-400 leading-relaxed">
-                                Durch den Einsatz von Tuya Smart Plugs mit Leistungsmessung werden Stromverbräuche einzelner Geräte (z.B. Server, Workstation)
-                                erfasst. Home Assistant aggregiert diese Daten zu Tages-, Wochen- und Monatsstatistiken.
+                                Durch den Einsatz von Tuya Smart Plugs mit Leistungsmessung werden Stromverbräuche einzelner Verbraucher
+                                (Server, Workstation, Haushaltsgeräte) erfasst. Die Daten werden in InfluxDB persistiert und ermöglichen
+                                detaillierte Kostenanalysen und Anomalie-Erkennung.
                             </p>
-                            <ul className="space-y-2 text-sm text-gray-400">
-                                <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary" /> Identifikation von Stromfressern</li>
-                                <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary" /> Kostenanalyse in Echtzeit</li>
-                                <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary" /> Langzeit-Datenspeicherung (InfluxDB/MariaDB)</li>
-                            </ul>
                         </div>
                         <div className="space-y-4 order-1 md:order-2">
-                             {/* FOTO 5 */}
-                            <img src="/images/home-assistant-foto5.png" alt="Energy Graph Weekly" className="w-full h-auto rounded-lg border border-white/10 shadow-md hover:shadow-primary/20 transition-shadow" />
-                             {/* FOTO 6 */}
-                            <img src="/images/home-assistant-foto6.png" alt="Device Energy List" className="w-full h-auto rounded-lg border border-white/10 shadow-md hover:shadow-primary/20 transition-shadow" />
+                            <img src="/images/home-assistant-foto5.jpg" alt="Energy Graph Weekly" className="w-full h-auto rounded-lg border border-white/10 shadow-md hover:shadow-primary/20 transition-shadow" />
+                            <img src="/images/home-assistant-foto6.jpg" alt="Device Energy List" className="w-full h-auto rounded-lg border border-white/10 shadow-md hover:shadow-primary/20 transition-shadow" />
                         </div>
                     </div>
                 </div>
@@ -438,7 +463,7 @@ const ProjektHomeAssistant = () => {
         <div>
             <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
                 <AlertTriangle className="text-orange-500 w-7 h-7" />
-                Herausforderungen & Learnings
+                Technische Herausforderungen
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
                 {challenges.map((item, index) => (
@@ -461,14 +486,14 @@ const ProjektHomeAssistant = () => {
                 <CheckCircle2 className="w-10 h-10 text-primary" />
             </div>
             <div>
-                <h2 className="text-2xl font-bold mb-3 gradient-text">Fazit & Ausblick</h2>
+                <h2 className="text-2xl font-bold mb-3 gradient-text">Projekt-Fazit</h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                    Das Projekt hat erfolgreich gezeigt, dass eine leistungsfähige, datenschutzkonforme Smart-Home-Infrastruktur
-                    ohne Cloud-Zwang realisierbar ist. Die Kombination aus Raspberry Pi 5, Docker und Zigbee hat sich als
-                    äußerst stabil und performant erwiesen.
+                    Das Projekt demonstriert erfolgreich, dass eine leistungsfähige IoT-Infrastruktur ohne Abhängigkeit von externen
+                    Cloud-Providern realisierbar ist. Die Kombination aus Docker, Zigbee und VPN bietet ein Höchstmaß an
+                    Datenschutz und Ausfallsicherheit.
                 </p>
                 <p className="text-sm font-medium text-foreground">
-                    Nächste Schritte (Roadmap): Implementierung von Layer-3 Routing und weiterer Ausbau der Sensorik.
+                    Roadmap: Implementierung von VLAN-ACLs zur strikten IoT-Isolation und Erweiterung der Sensorik.
                 </p>
             </div>
         </div>
