@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import UeberMich from "./pages/UeberMich";
 import Kontakt from "./pages/Kontakt";
+import ProjektHomeServer from "./pages/ProjektHomeServer";
 import ProjektHomeAssistant from "./pages/ProjektHomeAssistant";
 import ProjektWebServer from "./pages/ProjektWebServer";
 import ProjektWebHosting from "./pages/ProjektWebHosting";
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/" element={<Index />} />
             <Route path="/ueber-mich" element={<UeberMich />} />
             <Route path="/kontakt" element={<Kontakt />} />
+            <Route path="/projekt/home-server" element={<ProjektHomeServer />} />
             <Route path="/projekt/home-assistant" element={<ProjektHomeAssistant />} />
             <Route path="/projekt/web-server" element={<ProjektWebServer />} />
             <Route path="/projekt/web-hosting" element={<ProjektWebHosting />} />
