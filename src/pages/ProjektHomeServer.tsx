@@ -194,7 +194,7 @@ docker --version`;
           {/* SSH LOGIN GÖRSELİ (Tıklanabilir) */}
           <div 
             className="relative group cursor-zoom-in"
-            onClick={() => setZoomedImage("/images/HomeServer_Foto4.png")}
+            onClick={() => setZoomedImage("/images/HomeServer_Foto6.png")}
           >
             <div className="absolute inset-0 bg-[#2496ED]/20 blur-2xl rounded-3xl -z-10 group-hover:bg-[#2496ED]/30 transition-all duration-500" />
             <div className="glass overflow-hidden rounded-2xl border border-white/10 shadow-2xl transition-transform duration-300 group-hover:scale-[1.02]">
@@ -205,15 +205,15 @@ docker --version`;
                      <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
                      <div className="w-3 h-3 rounded-full bg-green-500/50" />
                    </div>
-                   <div className="text-xs text-slate-500 font-mono ml-2">Raspberry Pi Hardware</div>
+                   <div className="text-xs text-slate-500 font-mono ml-2">Network Configuration (ifconfig)</div>
                 </div>
                 <Maximize2 size={14} className="text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <img 
-                src="/images/HomeServer_Foto4.png" 
-                alt="Raspberry Pi Hardware" 
+                src="/images/HomeServer_Foto6.png" 
+                alt="Network Configuration (ifconfig)" 
                 loading="lazy"
-                className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
+                className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity bg-black"
               />
             </div>
           </div>
