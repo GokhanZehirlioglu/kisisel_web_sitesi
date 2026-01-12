@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, Sun, Moon, Home, Server, Cloud } from "lucide-react";
+import { Menu, X, ChevronDown, Sun, Moon, Home, Server, Cloud, HardDrive } from "lucide-react";
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -33,6 +33,7 @@ const Navigation = () => {
   ];
 
   const projectLinks = [
+    { path: "/projekt/home-server", label: "Home Server Infrastructure", icon: HardDrive },
     { path: "/projekt/home-assistant", label: "Home Assistant", icon: Home },
     { path: "/projekt/web-server", label: "Web Server", icon: Server },
     { path: "/projekt/web-hosting", label: "Web Hosting", icon: Cloud },
@@ -71,7 +72,7 @@ const Navigation = () => {
                 <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
               </button>
               <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                <div className="bg-card border border-border rounded-xl p-2 min-w-[220px] shadow-xl">
+                <div className="bg-card border border-border rounded-xl p-2 min-w-[240px] shadow-xl">
                   {projectLinks.map((project) => (
                     <Link
                       key={project.path}
