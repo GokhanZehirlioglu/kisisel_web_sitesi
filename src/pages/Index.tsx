@@ -47,13 +47,13 @@ const Index = () => {
               </p>
 
               {/* Stats */}
-              <div className="flex flex-wrap justify-center gap-8 pt-4">
-                <div className="flex flex-col gap-1">
+              <div className="flex flex-wrap gap-8 pt-4">
+                <div className="flex flex-col items-center gap-1">
                   <span className="text-3xl font-semibold gradient-text">4</span>
                   <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Projekte</span>
                 </div>
 
-                <div className="relative group flex flex-col gap-1 cursor-pointer">
+                <div className="relative group flex flex-col items-center gap-1 cursor-pointer">
                   <span className="text-3xl font-semibold gradient-text">4</span>
                   <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Zertifikate</span>
 
@@ -74,7 +74,7 @@ const Index = () => {
                   </div>
                 </div>
 
-                <div className="relative group flex flex-col gap-1 cursor-pointer">
+                <div className="relative group flex flex-col items-center gap-1 cursor-pointer">
                   <span className="text-3xl font-semibold gradient-text">5</span>
                   <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Badges</span>
 
@@ -95,7 +95,7 @@ const Index = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col items-center gap-1">
                   <span className="text-3xl font-semibold gradient-text">24/7</span>
                   <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Home Server</span>
                 </div>
