@@ -28,7 +28,7 @@ const ProjektHomeServer = () => {
   const stats = [
     { icon: Calendar, label: "Zeitraum", value: "23.09 - 30.09.2025" },
     { icon: ServerIcon, label: "Hardware", value: "Raspberry Pi 5" },
-    { icon: Activity, label: "Uptime", value: "48+ Tage" },
+    { icon: Activity, label: "Runtime", value: "24/7 Aktiv" },
     { icon: CheckCircle2, label: "Status", value: "Aktiv (Produktiv)", highlight: true },
   ];
 
@@ -194,7 +194,7 @@ docker --version`;
           {/* SSH LOGIN GÖRSELİ (Tıklanabilir) */}
           <div 
             className="relative group cursor-zoom-in"
-            onClick={() => setZoomedImage("/images/HomeServer_Foto8.png")}
+            onClick={() => setZoomedImage("/images/HomeServer_Foto4.png")}
           >
             <div className="absolute inset-0 bg-[#2496ED]/20 blur-2xl rounded-3xl -z-10 group-hover:bg-[#2496ED]/30 transition-all duration-500" />
             <div className="glass overflow-hidden rounded-2xl border border-white/10 shadow-2xl transition-transform duration-300 group-hover:scale-[1.02]">
@@ -205,13 +205,13 @@ docker --version`;
                      <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
                      <div className="w-3 h-3 rounded-full bg-green-500/50" />
                    </div>
-                   <div className="text-xs text-slate-500 font-mono ml-2">lgbeta@raspberrypi (SSH)</div>
+                   <div className="text-xs text-slate-500 font-mono ml-2">Raspberry Pi Hardware</div>
                 </div>
                 <Maximize2 size={14} className="text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <img 
-                src="/images/HomeServer_Foto8.png" 
-                alt="SSH Remote Access" 
+                src="/images/HomeServer_Foto4.png" 
+                alt="Raspberry Pi Hardware" 
                 loading="lazy"
                 className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
               />
@@ -299,57 +299,39 @@ docker --version`;
           </div>
 
           {/* Hardware Images Grid */}
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* Case with Power Button */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Docker Service Status */}
             <div 
               className="relative group cursor-zoom-in rounded-xl overflow-hidden border border-white/10 shadow-lg hover:shadow-2xl transition-all duration-300"
-              onClick={() => setZoomedImage("/images/HomeServer_Foto2.png")}
+              onClick={() => setZoomedImage("/images/HomeServer_Foto9.png")}
             >
               <img 
-                src="/images/HomeServer_Foto2.png" 
-                alt="Raspberry Pi Case - Power Button" 
+                src="/images/HomeServer_Foto9.png" 
+                alt="Docker Service Status - Active" 
                 loading="lazy"
-                className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
+                className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity bg-black"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p className="text-xs font-medium">Power LED Indicator</p>
+                <p className="text-xs font-medium">Docker Service - 1 Month 18 Days</p>
               </div>
               <Maximize2 size={14} className="absolute top-3 right-3 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
 
-            {/* Case Airflow */}
+            {/* SSH Remote Access */}
             <div 
               className="relative group cursor-zoom-in rounded-xl overflow-hidden border border-white/10 shadow-lg hover:shadow-2xl transition-all duration-300"
-              onClick={() => setZoomedImage("/images/HomeServer_Foto3.png")}
+              onClick={() => setZoomedImage("/images/HomeServer_Foto8.png")}
             >
               <img 
-                src="/images/HomeServer_Foto3.png" 
-                alt="Raspberry Pi Case - Airflow" 
+                src="/images/HomeServer_Foto8.png" 
+                alt="SSH Remote Access" 
                 loading="lazy"
-                className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
+                className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity bg-black"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p className="text-xs font-medium">Optimized Airflow Design</p>
-              </div>
-              <Maximize2 size={14} className="absolute top-3 right-3 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-            </div>
-
-            {/* Internal Cooling */}
-            <div 
-              className="relative group cursor-zoom-in rounded-xl overflow-hidden border border-white/10 shadow-lg hover:shadow-2xl transition-all duration-300"
-              onClick={() => setZoomedImage("/images/HomeServer_Foto4.png")}
-            >
-              <img 
-                src="/images/HomeServer_Foto4.png" 
-                alt="Raspberry Pi Internal Cooling" 
-                loading="lazy"
-                className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p className="text-xs font-medium">Active Cooling System</p>
+                <p className="text-xs font-medium">SSH Login - Remote Administration</p>
               </div>
               <Maximize2 size={14} className="absolute top-3 right-3 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
@@ -422,25 +404,37 @@ docker --version`;
                 />
               </div>
 
-              {/* Docker Service Status (Tıklanabilir) */}
-              <div 
-                className="rounded-xl overflow-hidden shadow-xl border border-[#2496ED]/30 group cursor-zoom-in relative"
-                onClick={() => setZoomedImage("/images/HomeServer_Foto9.png")}
-              >
-                <div className="flex items-center justify-between px-4 py-2 bg-blue-950/30 border-b border-[#2496ED]/20">
-                  <div className="flex items-center gap-2">
-                    <Activity size={14} className="text-green-400" />
-                    <span className="text-xs text-green-400 font-bold uppercase">Service Status (1 Month 18 Days)</span>
-                  </div>
-                  <Maximize2 size={12} className="text-green-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+              {/* Hardware Case Photos */}
+              <div className="grid grid-cols-2 gap-4">
+                {/* Case with Power Button */}
+                <div 
+                  className="rounded-xl overflow-hidden shadow-lg border border-white/10 group cursor-zoom-in relative"
+                  onClick={() => setZoomedImage("/images/HomeServer_Foto2.png")}
+                >
+                  <img 
+                    src="/images/HomeServer_Foto2.png" 
+                    alt="Raspberry Pi Case - Power LED" 
+                    loading="lazy"
+                    className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Maximize2 size={12} className="absolute top-2 right-2 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-                
-                <img 
-                  src="/images/HomeServer_Foto9.png" 
-                  alt="Docker Service Status" 
-                  loading="lazy"
-                  className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity bg-black"
-                />
+
+                {/* Case Airflow */}
+                <div 
+                  className="rounded-xl overflow-hidden shadow-lg border border-white/10 group cursor-zoom-in relative"
+                  onClick={() => setZoomedImage("/images/HomeServer_Foto3.png")}
+                >
+                  <img 
+                    src="/images/HomeServer_Foto3.png" 
+                    alt="Raspberry Pi Case - Airflow Design" 
+                    loading="lazy"
+                    className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Maximize2 size={12} className="absolute top-2 right-2 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
               </div>
 
             </div>
