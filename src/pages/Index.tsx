@@ -60,7 +60,7 @@ const Index = () => {
                     <ul className="space-y-2">
                       <li className="flex items-center gap-2 text-sm">
                         <Check className="w-4 h-4 text-primary" />
-                        Home Server Infrastructure
+                        Home Server Infrastructure (Raspberry Pi 5 & Docker)
                       </li>
                       <li className="flex items-center gap-2 text-sm">
                         <Check className="w-4 h-4 text-primary" />
@@ -72,7 +72,7 @@ const Index = () => {
                       </li>
                       <li className="flex items-center gap-2 text-sm">
                         <Check className="w-4 h-4 text-primary" />
-                        Web Hosting (Cloudflare)
+                        Web Hosting & Selfhosting (Cloudflare)
                       </li>
                     </ul>
                     <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-card" />
