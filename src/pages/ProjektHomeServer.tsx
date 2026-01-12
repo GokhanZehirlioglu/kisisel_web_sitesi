@@ -492,26 +492,6 @@ docker --version`;
             </div>
           </div>
 
-          {/* Network Configuration (Tıklanabilir) */}
-          <div 
-            className="relative group rounded-xl overflow-hidden shadow-xl border border-white/10 bg-black cursor-zoom-in"
-            onClick={() => setZoomedImage("/images/HomeServer_Foto6.png")}
-          >
-            <div className="bg-slate-800/50 px-4 py-2 flex items-center justify-between border-b border-white/5">
-              <div className="flex items-center gap-2">
-                <Terminal size={14} className="text-slate-400" />
-                <span className="text-xs text-slate-400">Network Configuration (ifconfig)</span>
-              </div>
-              <Maximize2 size={12} className="text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </div>
-            <img 
-              src="/images/HomeServer_Foto6.png" 
-              alt="Network Configuration" 
-              loading="lazy"
-              className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
-            />
-          </div>
-
           {/* Tech Stack Icons */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
             {techStack.map((tech) => (
