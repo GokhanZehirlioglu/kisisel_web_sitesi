@@ -209,12 +209,6 @@ docker --version`;
                 </div>
                 <Maximize2 size={14} className="text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-              <img 
-                src="/images/HomeServer_Foto6.png" 
-                alt="Network Configuration (ifconfig)" 
-                loading="lazy"
-                className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity bg-black"
-              />
             </div>
           </div>
         </div>
