@@ -212,10 +212,22 @@ docker --version`;
               <img 
                 src="/images/HomeServer_Foto8.png" 
                 alt="SSH Remote Access" 
+                loading="lazy"
                 className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
               />
             </div>
           </div>
+        </div>
+
+        {/* Tech Stack Icons */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 max-w-4xl mx-auto">
+          {techStack.map((tech) => (
+            <div key={tech.title} className="flex flex-col items-center justify-center p-4 rounded-xl bg-white dark:bg-white/5 border border-slate-100 dark:border-white/5 hover:border-[#2496ED]/30 transition-colors">
+              <img src={tech.icon} alt={tech.title} className="w-8 h-8 mb-2 opacity-80" />
+              <span className="text-sm font-semibold text-center">{tech.title}</span>
+              <span className="text-[10px] text-muted-foreground text-center">{tech.desc}</span>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -296,6 +308,7 @@ docker --version`;
               <img 
                 src="/images/HomeServer_Foto2.png" 
                 alt="Raspberry Pi Case - Power Button" 
+                loading="lazy"
                 className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -313,6 +326,7 @@ docker --version`;
               <img 
                 src="/images/HomeServer_Foto3.png" 
                 alt="Raspberry Pi Case - Airflow" 
+                loading="lazy"
                 className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -330,6 +344,7 @@ docker --version`;
               <img 
                 src="/images/HomeServer_Foto4.png" 
                 alt="Raspberry Pi Internal Cooling" 
+                loading="lazy"
                 className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -402,6 +417,7 @@ docker --version`;
                 <img 
                   src="/images/HomeServer_Foto1.png" 
                   alt="Docker Version Info" 
+                  loading="lazy"
                   className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity bg-black"
                 />
               </div>
@@ -422,6 +438,7 @@ docker --version`;
                 <img 
                   src="/images/HomeServer_Foto9.png" 
                   alt="Docker Service Status" 
+                  loading="lazy"
                   className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity bg-black"
                 />
               </div>
@@ -469,6 +486,7 @@ docker --version`;
               <img 
                 src="/images/HomeServer_Foto5.png" 
                 alt="System Information - 48 Days Uptime" 
+                loading="lazy"
                 className="w-full h-auto"
               />
               
@@ -495,6 +513,7 @@ docker --version`;
             <img 
               src="/images/HomeServer_Foto6.png" 
               alt="Network Configuration" 
+              loading="lazy"
               className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
             />
           </div>
