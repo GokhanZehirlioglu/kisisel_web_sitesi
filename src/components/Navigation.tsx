@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, Sun, Moon, Home, Server, Cloud, HardDrive } from "lucide-react";
+import Logo from "./Logo";
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -45,9 +46,12 @@ const Navigation = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-4 bg-card/80 backdrop-blur-xl border-b border-border">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Brand */}
-          <Link to="/" className="flex flex-col leading-tight">
-            <span className="text-lg md:text-xl font-semibold text-foreground">gökhan zehirlioglu</span>
-            <span className="text-[10px] md:text-xs font-normal text-primary tracking-wide">Fachinformatiker für Systemintegration</span>
+          <Link to="/" className="flex items-center gap-3 group">
+            <Logo className="w-10 h-10 text-primary transition-transform group-hover:scale-110" />
+            <div className="flex flex-col leading-tight">
+              <span className="text-lg md:text-xl font-semibold text-foreground">gökhan zehirlioglu</span>
+              <span className="text-[10px] md:text-xs font-normal text-primary tracking-wide">Fachinformatiker für Systemintegration</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -57,9 +61,8 @@ const Navigation = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium transition-colors ${
-                  isActive(link.path) ? "text-primary" : "text-muted-foreground hover:text-primary"
-                }`}
+                className={`text-sm font-medium transition-colors ${isActive(link.path) ? "text-primary" : "text-muted-foreground hover:text-primary"
+                  }`}
               >
                 {link.label}
               </Link>
@@ -89,9 +92,8 @@ const Navigation = () => {
 
             <Link
               to="/kontakt"
-              className={`text-sm font-medium transition-colors ${
-                isActive("/kontakt") ? "text-primary" : "text-muted-foreground hover:text-primary"
-              }`}
+              className={`text-sm font-medium transition-colors ${isActive("/kontakt") ? "text-primary" : "text-muted-foreground hover:text-primary"
+                }`}
             >
               Kontakt
             </Link>
