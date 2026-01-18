@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -23,23 +24,25 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/ueber-mich" element={<UeberMich />} />
-            <Route path="/kontakt" element={<Kontakt />} />
-            <Route path="/projekt/home-server" element={<ProjektHomeServer />} />
-            <Route path="/projekt/home-assistant" element={<ProjektHomeAssistant />} />
-            <Route path="/projekt/web-server" element={<ProjektWebServer />} />
-            <Route path="/projekt/web-hosting" element={<ProjektWebHosting />} />
-            <Route path="/projekt/switching-vlan-einrichten" element={<ProjektSwitchingVlanEintichten />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <HelmetProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/ueber-mich" element={<UeberMich />} />
+              <Route path="/kontakt" element={<Kontakt />} />
+              <Route path="/projekt/home-server" element={<ProjektHomeServer />} />
+              <Route path="/projekt/home-assistant" element={<ProjektHomeAssistant />} />
+              <Route path="/projekt/web-server" element={<ProjektWebServer />} />
+              <Route path="/projekt/web-hosting" element={<ProjektWebHosting />} />
+              <Route path="/projekt/switching-vlan-einrichten" element={<ProjektSwitchingVlanEintichten />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </HelmetProvider>
     </QueryClientProvider>
   );
 };

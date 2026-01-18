@@ -1,12 +1,13 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
-import { 
-  Quote, 
-  Briefcase, 
+import {
+  Quote,
+  Briefcase,
   FlaskConical, // Yeni ikon: Home Lab / Deney Tüpü
-  ArrowRight, 
-  CheckCircle2, 
-  Loader2, 
+  ArrowRight,
+  CheckCircle2,
+  Loader2,
   Target,
   Layers,
   BookOpen,
@@ -14,7 +15,7 @@ import {
 } from "lucide-react";
 
 const UeberMich: React.FC = () => {
-  
+
   // --- KONFİGÜRASYON: TEKNOLOJİ STACK'İ ---
   // Not: Linux yerine Ubuntu (Orijinal Turuncu) kullanıldı - Daha temiz görünür.
   // Wazuh için güvenilir Wikimedia kaynağı kullanıldı.
@@ -35,43 +36,47 @@ const UeberMich: React.FC = () => {
     { label: "Smart Home & IoT-Integration (Home Assistant)", status: "Abgeschlossen", active: false },
     { label: "Web-Server Einrichten (Ngnix)", status: "Abgeschlossen", active: false },
     { label: "Web-Hosting & Reverse Proxy(Cloudflare Tunnel)", status: "Abgeschlossen", active: false },
-    { label: "Switching Layerr 2 VLAN & Netz-Segmentierung", status: "In Arbeit", active: true }, 
-    { label: "Routing Layer-3 ACL", status: "Geplant", active: false }, 
+    { label: "Switching Layerr 2 VLAN & Netz-Segmentierung", status: "In Arbeit", active: true },
+    { label: "Routing Layer-3 ACL", status: "Geplant", active: false },
     { label: "Implementierung von Next Gen. Firewalls", status: "Geplant", active: false }, // İsim Düzeltildi
     { label: "Zentrales Logging & SIEM (Wazuh)", status: "Geplant", active: false }, // Eklendi (8. Modül)
   ];
 
   return (
     <Layout>
+      <Helmet>
+        <title>Über mich | Gökhan Zehirlioglu</title>
+        <meta name="description" content="Erfahren Sie mehr über meinen Werdegang vom Nachhilfeleiter zum IT-Spezialisten und mein Home-Lab." />
+      </Helmet>
       {/* 1. HERO SECTION (KİMLİK) */}
       <section className="pt-20 pb-12 px-4 bg-gradient-to-b from-primary/5 to-transparent">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-8">
             <span className="gradient-text">Über mich</span>
           </h1>
-          
+
           <div className="space-y-6 text-lg leading-relaxed text-foreground/90 max-w-3xl mx-auto">
             <p className="font-medium text-xl md:text-2xl text-primary/90">
               Ich arbeite strukturiert, prozessorientiert und verantwortungsbewusst.
             </p>
             <p>
-              Ein sorgfältiger Umgang mit Daten, klare Abläufe und nachvollziehbare Dokumentation sind für mich 
-              zentrale Voraussetzungen für einen verlässlichen IT-Betrieb. Aus diesem Grund habe ich mich bewusst 
-              für einen beruflichen Wechsel in die IT entschieden und befinde mich seit Juni 2025 in der 
+              Ein sorgfältiger Umgang mit Daten, klare Abläufe und nachvollziehbare Dokumentation sind für mich
+              zentrale Voraussetzungen für einen verlässlichen IT-Betrieb. Aus diesem Grund habe ich mich bewusst
+              für einen beruflichen Wechsel in die IT entschieden und befinde mich seit Juni 2025 in der
               Umschulung zum Fachinformatiker für Systemintegration.
             </p>
             <p>
-              Die IT bietet mir den Rahmen, in dem ich strukturiertes Arbeiten, analytisches Denken und 
+              Die IT bietet mir den Rahmen, in dem ich strukturiertes Arbeiten, analytisches Denken und
               technische Verantwortung systematisch verbinden kann.
             </p>
-            
+
             {/* Alıntı */}
             <div className="glass mt-10 p-6 rounded-xl border border-primary/10 shadow-sm flex flex-col md:flex-row items-center justify-center gap-4 text-center md:text-left">
               <div className="bg-primary/10 p-3 rounded-full">
                 <Quote className="w-6 h-6 text-primary" />
               </div>
               <p className="italic text-muted-foreground font-medium">
-                "Meine berufliche Haltung ist klar: Systeme müssen nicht nur funktionieren, sondern verständlich, 
+                "Meine berufliche Haltung ist klar: Systeme müssen nicht nur funktionieren, sondern verständlich,
                 wartbar und langfristig stabil sein."
               </p>
             </div>
@@ -80,31 +85,31 @@ const UeberMich: React.FC = () => {
       </section>
 
       <section className="pb-16 px-4 max-w-5xl mx-auto space-y-24">
-        
+
         {/* 2. GEÇMİŞ (HINTERGRUND) */}
         <div className="grid md:grid-cols-[1fr_3fr] gap-8 items-start">
           <div className="hidden md:flex flex-col items-center text-center p-6 glass rounded-2xl border border-primary/10 bg-gradient-to-br from-primary/5 to-transparent shadow-sm">
             <Briefcase className="w-10 h-10 text-primary mb-3" />
             <span className="text-xs font-bold text-primary tracking-wider uppercase">Hintergrund</span>
           </div>
-          
+
           <div className="space-y-5 text-muted-foreground leading-relaxed">
             <h2 className="text-2xl font-bold text-foreground flex items-center gap-4">
-              <span className="md:hidden bg-primary/10 p-2 rounded-lg"><Briefcase className="w-6 h-6 text-primary"/></span>
+              <span className="md:hidden bg-primary/10 p-2 rounded-lg"><Briefcase className="w-6 h-6 text-primary" /></span>
               Vom Hintergrund zur IT-Praxis
             </h2>
             <p>
-              Bereits vor meiner Umschulung habe ich in daten- und prozessorientierten Kontexten gearbeitet. 
-              Der strukturierte Umgang mit Informationen, das Aufbereiten von Ergebnissen sowie das Arbeiten mit 
+              Bereits vor meiner Umschulung habe ich in daten- und prozessorientierten Kontexten gearbeitet.
+              Der strukturierte Umgang mit Informationen, das Aufbereiten von Ergebnissen sowie das Arbeiten mit
               Systemübersichten und Dokumentationen gehörten dabei zu meinem Alltag.
             </p>
             <p>
-              Diese Erfahrung bildet heute die Grundlage meiner IT-Arbeitsweise. Besonders Aufgaben an der 
+              Diese Erfahrung bildet heute die Grundlage meiner IT-Arbeitsweise. Besonders Aufgaben an der
               Schnittstelle zwischen Technik, Organisation und Prozessen sprechen mich an.
             </p>
             <div className="bg-card p-5 rounded-xl border-l-4 border-primary shadow-sm">
               <p className="text-foreground font-medium">
-                Auch meine vorherige Tätigkeit als <span className="text-primary font-bold">Gründer und Leiter eines Nachhilfezentrums</span> hat 
+                Auch meine vorherige Tätigkeit als <span className="text-primary font-bold">Gründer und Leiter eines Nachhilfezentrums</span> hat
                 meine Organisationsfähigkeit, Verlässlichkeit und Kommunikationsstärke nachhaltig geprägt.
               </p>
             </div>
@@ -113,51 +118,51 @@ const UeberMich: React.FC = () => {
 
         {/* 3. YÖNTEM (HOME LAB FELSEFESİ) */}
         <div>
-           {/* İkon Değişti: Mezuniyet Kepi -> Deney Tüpü (FlaskConical) */}
-           <h2 className="text-2xl font-bold flex items-center gap-4 mb-6 text-foreground">
-             <div className="bg-primary/10 p-2 rounded-lg shadow-sm">
-               <FlaskConical className="w-7 h-7 text-primary" />
-             </div>
-             Aktuelle Entwicklung & Lernansatz
-           </h2>
-           <div className="prose max-w-none text-muted-foreground leading-relaxed text-lg">
-             <p className="mb-4">
-               Parallel zur Umschulung entwickle ich meine praktischen Fähigkeiten gezielt weiter. 
-               Dafür habe ich unter dem Namen <strong>Home-LAB</strong> eine eigene, zusammenhängende IT-Lernumgebung aufgebaut.
-             </p>
-             <p>
-               Dabei geht es mir nicht um isolierte Einzelübungen, sondern um eine <strong>systematische, praxisnahe Entwicklung</strong>: 
-               Planung, Umsetzung, Betrieb und Dokumentation gehören immer zusammen. Die einzelnen Module bauen bewusst 
-               aufeinander auf und orientieren sich an realen Anforderungen aus dem IT-Betrieb.
-             </p>
-           </div>
+          {/* İkon Değişti: Mezuniyet Kepi -> Deney Tüpü (FlaskConical) */}
+          <h2 className="text-2xl font-bold flex items-center gap-4 mb-6 text-foreground">
+            <div className="bg-primary/10 p-2 rounded-lg shadow-sm">
+              <FlaskConical className="w-7 h-7 text-primary" />
+            </div>
+            Aktuelle Entwicklung & Lernansatz
+          </h2>
+          <div className="prose max-w-none text-muted-foreground leading-relaxed text-lg">
+            <p className="mb-4">
+              Parallel zur Umschulung entwickle ich meine praktischen Fähigkeiten gezielt weiter.
+              Dafür habe ich unter dem Namen <strong>Home-LAB</strong> eine eigene, zusammenhängende IT-Lernumgebung aufgebaut.
+            </p>
+            <p>
+              Dabei geht es mir nicht um isolierte Einzelübungen, sondern um eine <strong>systematische, praxisnahe Entwicklung</strong>:
+              Planung, Umsetzung, Betrieb und Dokumentation gehören immer zusammen. Die einzelnen Module bauen bewusst
+              aufeinander auf und orientieren sich an realen Anforderungen aus dem IT-Betrieb.
+            </p>
+          </div>
         </div>
 
         {/* 4. GÖRSEL KANIT */}
         <div className="my-10">
           <div className="w-full rounded-2xl overflow-hidden shadow-2xl border border-primary/20 bg-black/50 group relative aspect-[16/9] md:aspect-[21/9]">
-             <img 
-               src="/images/homelab-architecture.png" 
-               alt="IT System Architecture Diagram" 
-               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-             />
-             <div className="absolute bottom-0 w-full bg-black/80 backdrop-blur-md py-4 px-6 border-t border-white/10">
-               <p className="text-sm text-center text-white/90 font-medium tracking-wide">
-                 Systemdenken in der Praxis: Eine Schicht-für-Schicht visualisierte Infrastruktur – von der Hardware bis zur Security-Gateway.
-               </p>
-             </div>
+            <img
+              src="/images/homelab-architecture.png"
+              alt="IT System Architecture Diagram"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+            />
+            <div className="absolute bottom-0 w-full bg-black/80 backdrop-blur-md py-4 px-6 border-t border-white/10">
+              <p className="text-sm text-center text-white/90 font-medium tracking-wide">
+                Systemdenken in der Praxis: Eine Schicht-für-Schicht visualisierte Infrastruktur – von der Hardware bis zur Security-Gateway.
+              </p>
+            </div>
           </div>
         </div>
 
         {/* 5. PROJE DURUMU & GELECEK */}
         <div className="grid md:grid-cols-2 gap-12 pt-10 border-t border-primary/10">
-          
+
           {/* Sol: Proje Durumları */}
           <div>
             <h3 className="text-xl font-bold flex items-center gap-3 mb-6">
-               <div className="bg-primary/10 p-2 rounded-lg">
-                 <LayoutDashboard className="text-primary w-5 h-5" />
-               </div>
+              <div className="bg-primary/10 p-2 rounded-lg">
+                <LayoutDashboard className="text-primary w-5 h-5" />
+              </div>
               Projekt-Status & Module
             </h3>
             <div className="space-y-3">
@@ -170,7 +175,7 @@ const UeberMich: React.FC = () => {
                     {item.status === "Abgeschlossen" && <CheckCircle2 size={18} className="text-green-500" />}
                     {item.status === "In Arbeit" && <Loader2 size={18} className="text-primary animate-spin" />}
                     {item.status === "Geplant" && <div className="w-4 h-4 rounded-full border-2 border-muted-foreground/30" />}
-                    
+
                     {/* Status Text (Mobil uyumlu min-width) */}
                     <span className="text-xs text-muted-foreground w-24 text-right hidden sm:block">{item.status}</span>
                   </div>
@@ -182,9 +187,9 @@ const UeberMich: React.FC = () => {
           {/* Sağ: Gelecek Hedefleri */}
           <div className="space-y-6">
             <h3 className="text-xl font-bold flex items-center gap-3 mb-6">
-               <div className="bg-primary/10 p-2 rounded-lg">
-                 <Target className="text-primary w-5 h-5" />
-               </div>
+              <div className="bg-primary/10 p-2 rounded-lg">
+                <Target className="text-primary w-5 h-5" />
+              </div>
               Blick nach vorn
             </h3>
             <div className="text-muted-foreground text-base leading-relaxed space-y-4">
@@ -195,7 +200,7 @@ const UeberMich: React.FC = () => {
               <div className="bg-card p-5 rounded-xl border border-primary/10 shadow-sm">
                 <p className="font-medium text-foreground mb-2">Mein Ziel:</p>
                 <p>
-                  Meine fachlichen Grundlagen systematisch zu vertiefen und mich langfristig in 
+                  Meine fachlichen Grundlagen systematisch zu vertiefen und mich langfristig in
                   verantwortungsvollen, struktur- und sicherheitsorientierten IT-Rollen zu etablieren.
                 </p>
               </div>
@@ -205,22 +210,22 @@ const UeberMich: React.FC = () => {
 
         {/* 6. AKADEMİK DERİNLEŞME (VERTIEFUNG) */}
         <div className="glass p-8 rounded-2xl border border-primary/10 bg-gradient-to-r from-primary/5 via-transparent to-transparent relative overflow-hidden mt-8">
-            <BookOpen className="absolute -right-8 -bottom-8 w-40 h-40 text-primary/5 rotate-12" />
-            
-            <h3 className="text-xl font-bold mb-4 flex items-center gap-3">
-              <div className="bg-primary/10 p-2 rounded-lg">
-                <Layers className="w-6 h-6 text-primary" />
-              </div>
-              Aktuelle fachliche Vertiefung
-            </h3>
-            <p className="text-base text-muted-foreground leading-relaxed relative z-10 max-w-3xl">
-              Parallel zu meiner Umschulung und der praktischen Arbeit im Home-LAB vertiefe ich meine Kenntnisse 
-              gezielt in netzwerk-, system- und cloudnahen Betriebsbereichen. Dabei folge ich strukturierten Lernpfaden 
-              mit Fokus auf <span className="text-foreground font-semibold">Netzwerk- und Systemadministration, Linux- und containerbasiertem Betrieb, 
-              Cloud-Administration</span> sowie <span className="text-foreground font-semibold">security-nahen Betriebs- und Monitoring-Themen</span>. 
-              Ziel ist es, meine praktische Systemerfahrung durch fundiertes, rollenorientiertes Fachwissen zu ergänzen 
-              und kontinuierlich zu schärfen.
-            </p>
+          <BookOpen className="absolute -right-8 -bottom-8 w-40 h-40 text-primary/5 rotate-12" />
+
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-3">
+            <div className="bg-primary/10 p-2 rounded-lg">
+              <Layers className="w-6 h-6 text-primary" />
+            </div>
+            Aktuelle fachliche Vertiefung
+          </h3>
+          <p className="text-base text-muted-foreground leading-relaxed relative z-10 max-w-3xl">
+            Parallel zu meiner Umschulung und der praktischen Arbeit im Home-LAB vertiefe ich meine Kenntnisse
+            gezielt in netzwerk-, system- und cloudnahen Betriebsbereichen. Dabei folge ich strukturierten Lernpfaden
+            mit Fokus auf <span className="text-foreground font-semibold">Netzwerk- und Systemadministration, Linux- und containerbasiertem Betrieb,
+              Cloud-Administration</span> sowie <span className="text-foreground font-semibold">security-nahen Betriebs- und Monitoring-Themen</span>.
+            Ziel ist es, meine praktische Systemerfahrung durch fundiertes, rollenorientiertes Fachwissen zu ergänzen
+            und kontinuierlich zu schärfen.
+          </p>
         </div>
 
         {/* 7. TECH STACK (UX ve Renk Düzeltmeleri Yapıldı) */}
@@ -228,18 +233,18 @@ const UeberMich: React.FC = () => {
           <h2 className="text-xs font-bold text-muted-foreground uppercase tracking-[0.2em] mb-10">
             Eingesetzte Technologien & Tools
           </h2>
-          
+
           <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16">
             {techStack.map((tech) => (
               // UX: Relative ve Group eklendi - Tooltip artık kaymaz
               <div key={tech.name} className="relative group flex flex-col items-center gap-3 transition-transform hover:-translate-y-1 cursor-pointer">
                 {/* Logo */}
-                <img 
-                  src={tech.url} 
-                  alt={tech.name} 
+                <img
+                  src={tech.url}
+                  alt={tech.name}
                   className="h-10 w-10 md:h-12 md:w-12 drop-shadow-sm object-contain"
                 />
-                
+
                 {/* Tooltip (Label) - Absolute pozisyon düzeltildi */}
                 <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[11px] font-medium text-muted-foreground bg-background/80 px-2 py-1 rounded shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-primary/10">
                   {tech.name}

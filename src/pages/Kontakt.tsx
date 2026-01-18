@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import { Helmet } from "react-helmet-async";
 import { Linkedin, Github, Mail, MapPin, Briefcase, Lightbulb } from "lucide-react";
 
 const Kontakt = () => {
@@ -46,6 +47,10 @@ const Kontakt = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Kontakt | Gökhan Zehirlioglu</title>
+        <meta name="description" content="Kontaktieren Sie mich für Zusammenarbeit oder Fragen. Erreichbar über LinkedIn, GitHub und E-Mail." />
+      </Helmet>
       {/* Hero */}
       <section className="py-16 px-4 text-center bg-gradient-to-b from-primary/5 to-transparent">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -87,9 +92,8 @@ const Kontakt = () => {
             {infoItems.map((item, index) => (
               <div
                 key={item.label}
-                className={`flex items-center gap-4 py-4 ${
-                  index < infoItems.length - 1 ? "border-b border-border" : ""
-                }`}
+                className={`flex items-center gap-4 py-4 ${index < infoItems.length - 1 ? "border-b border-border" : ""
+                  }`}
               >
                 <item.icon className="w-6 h-6 text-primary flex-shrink-0" />
                 <div>

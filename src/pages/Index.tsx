@@ -1,37 +1,18 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import TechLogos from "@/components/TechLogos";
-import { ArrowRight, Check } from "lucide-react";
+import StatCard from "@/components/StatCard";
+import { ArrowRight } from "lucide-react";
+import { techLogos, certificates, badges, projects } from "@/data/portfolio";
 
 const Index = () => {
-  const techLogos = [
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg", alt: "Azure", title: "Microsoft Azure" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg", alt: "Linux", title: "Linux" },
-    { src: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg", alt: "Cisco", title: "Cisco" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", alt: "Docker", title: "Docker" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg", alt: "Raspberry Pi", title: "Raspberry Pi" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cloudflare/cloudflare-original.svg", alt: "Cloudflare", title: "Cloudflare" },
-    { src: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/home-assistant.svg", alt: "Home Assistant", title: "Home Assistant" },
-    { src: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/zigbee2mqtt.svg", alt: "Zigbee", title: "Zigbee" },
-  ];
-
-  const certificates = [
-    "MS Azure Administrator (AZ-104)",
-    "MS Windows Server 2022 & Powershell",
-    "Linux Essentials",
-    "ITIL v4 Foundation",
-  ];
-
-  const badges = [
-    "CCNA: Introduction to Networks",
-    "Cisco Networking Basics",
-    "Cisco Operating Systems Support",
-    "Cisco Security and Connectivity Support",
-    "Cisco Introduction to IoT",
-  ];
-
   return (
     <Layout>
+      <Helmet>
+        <title>Gökhan Zehirlioglu - Fachinformatiker für Systemintegration</title>
+        <meta name="description" content="Portfolio von Gökhan Zehirlioglu, Fachinformatiker für Systemintegration. Spezialisiert auf Azure, Cisco, Linux und Netzwerkinfrastruktur." />
+      </Helmet>
       <section className="min-h-[calc(100vh-5rem)] flex items-center px-4 md:px-6 py-12">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -48,83 +29,31 @@ const Index = () => {
 
               {/* Stats */}
               <div className="flex flex-wrap gap-8 pt-4">
-                <div className="relative group flex flex-col items-center gap-1 cursor-pointer">
-                  <span className="text-3xl font-semibold gradient-text">4</span>
-                  <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Projekte</span>
+                <StatCard
+                  value={projects.length.toString()}
+                  label="Projekte"
+                  tooltipTitle="Abgeschlossene Projekte"
+                  items={projects}
+                />
 
-                  {/* Tooltip */}
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 min-w-[280px] bg-card border border-border rounded-xl p-4 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                    <div className="text-xs font-mono uppercase tracking-wider text-primary mb-3 pb-2 border-b border-border">
-                      Abgeschlossene Projekte
-                    </div>
-                    <ul className="space-y-2">
-                      <li className="flex items-center gap-2 text-sm">
-                        <Check className="w-4 h-4 text-primary" />
-                        Home Server Infrastructure (Raspberry Pi 5 & Docker)
-                      </li>
-                      <li className="flex items-center gap-2 text-sm">
-                        <Check className="w-4 h-4 text-primary" />
-                        Home Assistant (Smart Home)
-                      </li>
-                      <li className="flex items-center gap-2 text-sm">
-                        <Check className="w-4 h-4 text-primary" />
-                        Web Server (Nginx)
-                      </li>
-                      <li className="flex items-center gap-2 text-sm">
-                        <Check className="w-4 h-4 text-primary" />
-                        Web Hosting & Selfhosting (Cloudflare)
-                      </li>
-                    </ul>
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-card" />
-                  </div>
-                </div>
+                <StatCard
+                  value={certificates.length.toString()}
+                  label="Zertifikate"
+                  tooltipTitle="Offizielle Zertifikate"
+                  items={certificates}
+                />
 
-                <div className="relative group flex flex-col items-center gap-1 cursor-pointer">
-                  <span className="text-3xl font-semibold gradient-text">4</span>
-                  <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Zertifikate</span>
+                <StatCard
+                  value={badges.length.toString()}
+                  label="Badges"
+                  tooltipTitle="Cisco Networking Academy"
+                  items={badges}
+                />
 
-                  {/* Tooltip */}
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 min-w-[280px] bg-card border border-border rounded-xl p-4 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                    <div className="text-xs font-mono uppercase tracking-wider text-primary mb-3 pb-2 border-b border-border">
-                      Offizielle Zertifikate
-                    </div>
-                    <ul className="space-y-2">
-                      {certificates.map((cert) => (
-                        <li key={cert} className="flex items-center gap-2 text-sm">
-                          <Check className="w-4 h-4 text-primary" />
-                          {cert}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-card" />
-                  </div>
-                </div>
-
-                <div className="relative group flex flex-col items-center gap-1 cursor-pointer">
-                  <span className="text-3xl font-semibold gradient-text">5</span>
-                  <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Badges</span>
-
-                  {/* Tooltip */}
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 min-w-[280px] bg-card border border-border rounded-xl p-4 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                    <div className="text-xs font-mono uppercase tracking-wider text-primary mb-3 pb-2 border-b border-border">
-                      Cisco Networking Academy
-                    </div>
-                    <ul className="space-y-2">
-                      {badges.map((badge) => (
-                        <li key={badge} className="flex items-center gap-2 text-sm">
-                          <Check className="w-4 h-4 text-primary" />
-                          {badge}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-card" />
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-center gap-1">
-                  <span className="text-3xl font-semibold gradient-text">24/7</span>
-                  <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Home Server</span>
-                </div>
+                <StatCard
+                  value="24/7"
+                  label="Home Server"
+                />
               </div>
 
               {/* Buttons */}
