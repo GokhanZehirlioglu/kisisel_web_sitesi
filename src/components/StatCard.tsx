@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Check } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 
 interface StatCardProps {
     value: string;
@@ -13,9 +13,12 @@ const StatCard = ({ value, label, tooltipTitle, items, children }: StatCardProps
     const hasTooltip = tooltipTitle || items || children;
 
     return (
-        <div className={`flex flex-col items-center gap-1 ${hasTooltip ? "relative group cursor-pointer" : ""}`}>
+        <div className={`flex flex-col items-center gap-1 transition-transform duration-200 ${hasTooltip ? "relative group cursor-pointer hover:-translate-y-1" : ""}`}>
             <span className="text-3xl font-semibold gradient-text">{value}</span>
-            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{label}</span>
+            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground flex items-center gap-1 group-hover:text-primary transition-colors">
+                {label}
+                {hasTooltip && <ChevronDown className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />}
+            </span>
 
             {/* Tooltip */}
             {hasTooltip && (

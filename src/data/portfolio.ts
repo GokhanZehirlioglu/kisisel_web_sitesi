@@ -23,6 +23,9 @@ export const badges = [
     "Cisco Operating Systems Support",
     "Cisco Security and Connectivity Support",
     "Cisco Introduction to IoT",
+    "Industrial Networking Essentials",
+    "Industrial Cybersecurity Essential",
+    "Linux Unhatched",
 ];
 
 export const featuredProjects = [

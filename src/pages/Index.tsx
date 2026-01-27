@@ -59,21 +59,26 @@ const Index = () => {
               {/* Buttons */}
               <div className="flex flex-wrap gap-4 pt-4">
                 <Link
-                  to="/ueber-mich"
-                  className="inline-flex items-center gap-2 px-7 py-4 bg-gradient-to-r from-primary to-accent text-primary-foreground font-medium text-sm uppercase tracking-wider rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                  to="/projekte"
+                  className="relative inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold text-sm uppercase tracking-wider rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden"
                 >
-                  Mehr erfahren
-                  <ArrowRight className="w-4 h-4" />
+                  <span className="absolute inset-0 bg-white/20 group-hover:translate-x-full transition-transform duration-500 skew-x-12 -ml-4" />
+                  Projekte ansehen
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
+                  </span>
                 </Link>
                 <Link
-                  to="/projekte"
-                  className="inline-flex items-center gap-2 px-7 py-4 border border-primary/20 bg-primary/5 text-primary font-medium text-sm uppercase tracking-wider rounded-lg hover:bg-primary/10 hover:border-primary transition-all"
+                  to="/ueber-mich"
+                  className="inline-flex items-center gap-2 px-7 py-4 border border-primary/20 bg-background/50 backdrop-blur-sm text-foreground font-medium text-sm uppercase tracking-wider rounded-lg hover:bg-primary/5 hover:border-primary transition-all"
                 >
-                  Projekte ansehen
+                  Mehr erfahren
                 </Link>
                 <Link
                   to="/kontakt"
-                  className="inline-flex items-center gap-2 px-7 py-4 border border-border text-foreground font-medium text-sm uppercase tracking-wider rounded-lg hover:bg-secondary/50 hover:border-primary transition-all"
+                  className="inline-flex items-center gap-2 px-7 py-4 border border-border text-muted-foreground font-medium text-sm uppercase tracking-wider rounded-lg hover:bg-secondary/50 hover:text-foreground transition-all"
                 >
                   Kontakt
                 </Link>
@@ -81,23 +86,24 @@ const Index = () => {
             </div>
 
             {/* Hero Image Area */}
-            <div className="relative h-[450px] lg:h-[550px] flex items-end justify-center">
-              <div className="relative w-full h-full rounded-3xl overflow-hidden border border-border">
+            {/* Hero Image Area */}
+            <div className="flex flex-col gap-6 w-full items-center">
+              <div className="relative w-full h-[450px] lg:h-[550px] rounded-3xl overflow-hidden border border-border group shadow-2xl shadow-primary/5 transition-all duration-500 hover:shadow-primary/30 hover:border-primary/50">
                 {/* HERO IMAGE */}
                 <img
                   src="/images/hero.jpg"
                   alt="Hero"
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
 
                 {/* Overlays */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/10 to-emerald/20" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/10 to-emerald/20 transition-opacity duration-500 group-hover:opacity-60" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
               </div>
 
               {/* Tech Logos */}
-              <div className="absolute bottom-16 left-1/2 -translate-x-1/2">
-                <TechLogos logos={techLogos} />
+              <div className="w-full max-w-[95%]">
+                <TechLogos logos={techLogos} className="flex-nowrap justify-center" />
               </div>
             </div>
           </div>
